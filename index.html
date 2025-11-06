@@ -96,12 +96,63 @@
             box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
         }
 
-        .btn-login, .btn-register {
-            padding: 8px 25px;
+        #authButtons {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 12px;
+            justify-content: flex-end;
+            align-items: center;
+            max-width: 100%;
+            margin-left: auto;
+            padding: 0;
+        }
+        
+        /* 確保桌面版有足夠空間且按鈕水平排列 */
+        @media (min-width: 992px) {
+            .main-header .col-md-3:last-child {
+                min-width: 360px;
+                flex: 0 0 auto;
+            }
+            
+            #authButtons {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 12px;
+                width: auto;
+            }
+            
+            #authButtons .btn {
+                flex: 0 0 auto;
+                width: auto;
+            }
+        }
+
+        /* 確保在小螢幕上按鈕可以換行 */
+        @media (max-width: 991px) {
+            #authButtons {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .btn-login, .btn-register, .btn-guest {
+                padding: 7px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .btn-login, .btn-register, .btn-guest {
+            padding: 8px 20px;
             border-radius: 25px;
             font-weight: bold;
             border: 2px solid var(--gold);
             transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: fit-content;
+            margin: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .btn-login {
@@ -120,11 +171,39 @@
             background: linear-gradient(135deg, var(--gold), var(--dark-gold));
             color: #000;
             animation: pulse-glow 2s infinite;
+            box-sizing: border-box;
+            overflow: visible;
+            transform: scale(1);
+        }
+        
+        /* 確保動畫不會導致重疊 */
+        .btn-register:hover {
+            z-index: 2;
+            animation: none;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+            transform: translateY(-2px) scale(1);
+        }
+
+        .btn-guest {
+            background: transparent;
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .btn-guest:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
-            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.9); }
+            0%, 100% { 
+                box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            }
         }
 
         /* Marquee */
@@ -457,9 +536,28 @@
                 margin: 5px 0;
             }
 
-            .btn-login, .btn-register {
-                padding: 6px 15px;
-                font-size: 0.85rem;
+            .btn-login, .btn-register, .btn-guest {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            /* 手機版：垂直排列 */
+            #authButtons {
+                flex-direction: column !important;
+                flex-wrap: nowrap !important;
+                gap: 6px;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            #authButtons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* 確保在手機端 col-md-3 有足夠空間 */
+            .main-header .col-md-3:last-child {
+                margin-top: 10px;
             }
 
             /* 公告欄 - 手機版與桌面版相同樣式 */
@@ -866,13 +964,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 text-end">
+                <div class="col-md-3 text-end" style="min-width: 280px;">
                     <div id="authButtons">
-                        <button class="btn btn-login me-2" onclick="showLogin()">
+                        <button class="btn btn-login" onclick="showLogin()">
                             <i class="fas fa-sign-in-alt"></i> 登入
                         </button>
                         <button class="btn btn-register" onclick="showRegister()">
                             <i class="fas fa-user-plus"></i> 註冊
+                        </button>
+                        <button class="btn btn-guest" onclick="guestLogin()">
+                            <i class="fas fa-user-secret"></i> 訪客
                         </button>
                     </div>
                     <div id="userMenu" style="display: none;">
@@ -886,6 +987,13 @@
                                 </a></li>
                                 <li><a class="dropdown-item" href="#" onclick="showWithdraw()">
                                     <i class="fas fa-minus-circle"></i> 提款
+                                </a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showAccount()">
+                                    <i class="fas fa-file-alt"></i> 帳務記錄
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showProfile()">
+                                    <i class="fas fa-user"></i> 會員資料
                                 </a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#" onclick="logout()">
@@ -1245,9 +1353,14 @@
                         </button>
                     </form>
                     <div class="text-center mt-3">
-                        <a href="#" class="text-warning">忘記密碼？</a>
-                        <span class="mx-2">|</span>
-                        <a href="#" onclick="showRegister()" class="text-warning">立即註冊</a>
+                        <button type="button" class="btn btn-outline-warning w-100 mb-2" onclick="guestLogin()">
+                            <i class="fas fa-user-secret me-2"></i>訪客登入（無需註冊）
+                        </button>
+                        <div>
+                            <a href="#" class="text-warning">忘記密碼？</a>
+                            <span class="mx-2">|</span>
+                            <a href="#" onclick="showRegister()" class="text-warning">立即註冊</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1520,24 +1633,56 @@
                         <h5 id="profileUsername">未登入</h5>
                         <p class="text-muted mb-0" id="profileLevel">普通會員</p>
                     </div>
+                    
+                    <!-- 餘額顯示 -->
+                    <div class="mb-3" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 15px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted d-block">當前餘額</small>
+                                <h4 class="mb-0" style="color: var(--gold);" id="profileBalance">0 元</h4>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted d-block">VIP 等級</small>
+                                <span class="badge" style="background: var(--gold); color: #000; font-size: 0.9rem;" id="profileVIPBadge">普通會員</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="mb-3">
-                        <label class="form-label">帳號</label>
+                        <label class="form-label"><i class="fas fa-user me-2"></i>帳號</label>
                         <input type="text" class="form-control" id="profileUsernameInput" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">手機號碼</label>
+                        <label class="form-label"><i class="fas fa-phone me-2"></i>手機號碼</label>
                         <input type="tel" class="form-control" id="profilePhone" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
+                        <label class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
                         <input type="email" class="form-control" id="profileEmail" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">註冊時間</label>
+                        <label class="form-label"><i class="fas fa-calendar me-2"></i>註冊時間</label>
                         <input type="text" class="form-control" id="profileCreatedAt" readonly>
                     </div>
+                    
+                    <!-- 統計資訊 -->
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px; text-align: center;">
+                                <small class="text-muted d-block">總充值</small>
+                                <strong style="color: var(--gold);" id="profileTotalDeposit">0 元</strong>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px; text-align: center;">
+                                <small class="text-muted d-block">總提款</small>
+                                <strong style="color: var(--gold);" id="profileTotalWithdraw">0 元</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-warning" onclick="showChangePassword()">
+                        <button class="btn btn-outline-warning" onclick="showChangePassword()" id="changePasswordBtn">
                             <i class="fas fa-key me-2"></i>修改密碼
                         </button>
                         <button class="btn btn-outline-danger" onclick="logout()">
@@ -1638,11 +1783,67 @@
             registerModal.show();
         }
 
+        // 訪客登入功能
+        function guestLogin() {
+            // 生成訪客帳號（使用時間戳 + 隨機數）
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 10000);
+            const guestUsername = `guest_${timestamp}_${random}`;
+            
+            // 創建訪客用戶對象
+            const guestUser = {
+                username: guestUsername,
+                password: '', // 訪客無密碼
+                phone: '',
+                email: '',
+                referral: '',
+                balance: 0,
+                isGuest: true, // 標記為訪客
+                createdAt: new Date().toISOString(),
+                guestExpiry: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24小時後過期
+            };
+            
+            // 保存訪客用戶到 localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            // 檢查是否已存在訪客用戶，如果存在則更新
+            const existingGuestIndex = users.findIndex(u => u.isGuest && u.username === guestUsername);
+            if (existingGuestIndex !== -1) {
+                users[existingGuestIndex] = guestUser;
+            } else {
+                users.push(guestUser);
+            }
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // 設置當前用戶
+            currentUser = guestUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            // 關閉登入模態框（如果打開的話）
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            if (loginModal) {
+                loginModal.hide();
+            }
+            
+            showToast('訪客登入成功！歡迎體驗（建議註冊以保存數據）', 'success');
+            updateUI();
+        }
+
         // 顯示每日簽到功能
         function showCheckIn() {
             if (!currentUser) {
-                showToast('請先登入才能簽到', 'warning');
-                showLogin();
+                if (confirm('您尚未登入，是否以訪客身份體驗？')) {
+                    guestLogin();
+                } else {
+                    showLogin();
+                }
+                return;
+            }
+            
+            // 訪客無法簽到，提示註冊
+            if (currentUser.isGuest) {
+                if (confirm('訪客模式無法使用簽到功能。\n\n是否要註冊帳號以使用完整功能？')) {
+                    showRegister();
+                }
                 return;
             }
             
@@ -1811,8 +2012,22 @@
             e.preventDefault();
             
             if (!currentUser) {
-                showToast('請先登入', 'warning');
-                showLogin();
+                if (confirm('您尚未登入，是否以訪客身份體驗？')) {
+                    guestLogin();
+                } else {
+                    showLogin();
+                }
+                return;
+            }
+            
+            // 訪客無法充值，提示註冊
+            if (currentUser.isGuest) {
+                showToast('訪客模式無法進行充值，請先註冊帳號', 'warning');
+                const depositModal = bootstrap.Modal.getInstance(document.getElementById('depositModal'));
+                if (depositModal) depositModal.hide();
+                if (confirm('是否要註冊帳號以使用完整功能？')) {
+                    showRegister();
+                }
                 return;
             }
             
@@ -1863,8 +2078,22 @@
             e.preventDefault();
             
             if (!currentUser) {
-                showToast('請先登入', 'warning');
-                showLogin();
+                if (confirm('您尚未登入，是否以訪客身份體驗？')) {
+                    guestLogin();
+                } else {
+                    showLogin();
+                }
+                return;
+            }
+            
+            // 訪客無法提款，提示註冊
+            if (currentUser.isGuest) {
+                showToast('訪客模式無法進行提款，請先註冊帳號', 'warning');
+                const withdrawModal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+                if (withdrawModal) withdrawModal.hide();
+                if (confirm('是否要註冊帳號以使用完整功能？')) {
+                    showRegister();
+                }
                 return;
             }
             
@@ -1921,8 +2150,17 @@
                 document.getElementById('authButtons').style.display = 'none';
                 document.getElementById('userMenu').style.display = 'block';
                 document.getElementById('balanceSection').style.display = 'block';
-                document.getElementById('username').textContent = currentUser.username;
-                document.getElementById('userBalance').textContent = currentUser.balance.toLocaleString();
+                
+                // 顯示用戶名（如果是訪客，顯示簡化名稱）
+                const displayName = currentUser.isGuest ? '訪客' : currentUser.username;
+                document.getElementById('username').textContent = displayName;
+                document.getElementById('userBalance').textContent = (currentUser.balance || 0).toLocaleString();
+                
+                // 如果是訪客，在用戶名旁邊顯示標記
+                const usernameEl = document.getElementById('username');
+                if (currentUser.isGuest) {
+                    usernameEl.innerHTML = '訪客 <span class="badge bg-warning text-dark" style="font-size: 0.7rem;">體驗模式</span>';
+                }
             } else {
                 document.getElementById('authButtons').style.display = 'block';
                 document.getElementById('userMenu').style.display = 'none';
@@ -1941,10 +2179,36 @@
         // 遊戲開啟功能
         function openGame(gameType) {
             if (!currentUser) {
-                showToast('請先登入或註冊', 'warning');
-                showLogin();
+                // 如果未登入，提供訪客登入選項
+                if (confirm('您尚未登入，是否以訪客身份體驗？\n\n訪客模式：\n✓ 可瀏覽遊戲\n✓ 數據不會保存\n✓ 建議註冊以保存數據')) {
+                    guestLogin();
+                    // 等待登入完成後再跳轉
+                    setTimeout(() => {
+                        const gamePages = {
+                            'live': 'live.html',
+                            'sports': 'sports.html',
+                            'chess': 'chess.html',
+                            'slots': 'slots.html',
+                            'lottery': 'lottery.html',
+                            'fishing': 'fishing.html',
+                            'streaming': 'streaming.html',
+                            'esports': 'esports.html'
+                        };
+                        if (gamePages[gameType]) {
+                            window.location.href = gamePages[gameType];
+                        }
+                    }, 500);
+                } else {
+                    showLogin();
+                }
                 return;
             }
+            
+            // 如果是訪客，提示註冊
+            if (currentUser.isGuest) {
+                showToast('訪客模式：數據不會保存，建議註冊以保存遊戲記錄', 'info');
+            }
+            
             // 跳轉到對應的遊戲頁面
             const gamePages = {
                 'live': 'live.html',
@@ -2027,14 +2291,31 @@
         // 顯示帳務模態框
         function showAccount() {
             if (!currentUser) {
-                showToast('請先登入', 'warning');
-                showLogin();
+                if (confirm('您尚未登入，是否以訪客身份體驗？')) {
+                    guestLogin();
+                    // 等待登入完成後再顯示帳務
+                    setTimeout(() => {
+                        updateBottomNavActive('account');
+                        loadAccountData();
+                        const accountModal = new bootstrap.Modal(document.getElementById('accountModal'));
+                        accountModal.show();
+                    }, 300);
+                } else {
+                    showLogin();
+                }
                 return;
             }
             updateBottomNavActive('account');
             loadAccountData();
             const accountModal = new bootstrap.Modal(document.getElementById('accountModal'));
             accountModal.show();
+            
+            // 如果是訪客，顯示提示
+            if (currentUser.isGuest) {
+                setTimeout(() => {
+                    showToast('訪客模式：交易記錄僅在本次會話中有效', 'info');
+                }, 500);
+            }
         }
 
         // 載入帳務數據
@@ -2118,37 +2399,105 @@
 
         // 顯示個人資料模態框
         function showProfile() {
-            updateBottomNavActive('profile');
+            // 桌面版不需要 updateBottomNavActive
+            if (window.innerWidth > 768) {
+                // 桌面版直接顯示
+            } else {
+                updateBottomNavActive('profile');
+            }
+            
             if (!currentUser) {
-                showToast('請先登入', 'warning');
-                showLogin();
+                if (confirm('您尚未登入，是否以訪客身份體驗？')) {
+                    guestLogin();
+                    // 等待登入完成後再顯示
+                    setTimeout(() => {
+                        showProfile();
+                    }, 300);
+                } else {
+                    showLogin();
+                }
                 return;
             }
             
             // 載入用戶資料
-            document.getElementById('profileUsername').textContent = currentUser.username;
-            document.getElementById('profileUsernameInput').value = currentUser.username;
-            document.getElementById('profilePhone').value = currentUser.phone || '';
-            document.getElementById('profileEmail').value = currentUser.email || '';
+            const displayName = currentUser.isGuest ? '訪客' : currentUser.username;
+            document.getElementById('profileUsername').textContent = displayName + (currentUser.isGuest ? ' (體驗模式)' : '');
+            document.getElementById('profileUsernameInput').value = currentUser.isGuest ? '訪客帳號（臨時）' : currentUser.username;
+            document.getElementById('profilePhone').value = currentUser.phone || (currentUser.isGuest ? '訪客模式無需手機' : '');
+            document.getElementById('profileEmail').value = currentUser.email || (currentUser.isGuest ? '訪客模式無需Email' : '');
             
             const createdAt = new Date(currentUser.createdAt);
             document.getElementById('profileCreatedAt').value = createdAt.toLocaleString('zh-TW');
             
-            // 計算VIP等級
-            const totalBet = JSON.parse(localStorage.getItem('transactions') || '[]')
-                .filter(t => t.username === currentUser.username && t.type === 'bet')
-                .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+            // 顯示餘額
+            document.getElementById('profileBalance').textContent = (currentUser.balance || 0).toLocaleString() + ' 元';
             
-            let level = '普通會員';
-            if (totalBet >= 1000000) level = '鑽石VIP';
-            else if (totalBet >= 500000) level = '白金VIP';
-            else if (totalBet >= 100000) level = '黃金VIP';
-            else if (totalBet >= 50000) level = '白銀VIP';
+            // 計算VIP等級和統計
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            const userTransactions = transactions.filter(t => t.username === currentUser.username);
+            
+            let level = currentUser.isGuest ? '訪客（體驗模式）' : '普通會員';
+            let levelBadge = '普通會員';
+            let badgeColor = 'var(--gold)';
+            
+            if (!currentUser.isGuest) {
+                const totalBet = userTransactions
+                    .filter(t => t.type === 'bet')
+                    .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+                
+                if (totalBet >= 1000000) {
+                    level = '鑽石VIP';
+                    levelBadge = '💎 鑽石VIP';
+                    badgeColor = '#00f3ff';
+                } else if (totalBet >= 500000) {
+                    level = '白金VIP';
+                    levelBadge = '⭐ 白金VIP';
+                    badgeColor = '#ffd700';
+                } else if (totalBet >= 100000) {
+                    level = '黃金VIP';
+                    levelBadge = '🏆 黃金VIP';
+                    badgeColor = '#ffa500';
+                } else if (totalBet >= 50000) {
+                    level = '白銀VIP';
+                    levelBadge = '🥈 白銀VIP';
+                    badgeColor = '#c0c0c0';
+                }
+            }
             
             document.getElementById('profileLevel').textContent = level;
+            document.getElementById('profileVIPBadge').textContent = levelBadge;
+            document.getElementById('profileVIPBadge').style.background = badgeColor;
+            document.getElementById('profileVIPBadge').style.color = badgeColor === '#c0c0c0' ? '#000' : '#000';
+            
+            // 計算總充值和總提款
+            const totalDeposit = userTransactions
+                .filter(t => t.type === 'deposit')
+                .reduce((sum, t) => sum + (t.amount || 0), 0);
+            
+            const totalWithdraw = userTransactions
+                .filter(t => t.type === 'withdraw')
+                .reduce((sum, t) => sum + Math.abs(t.amount || 0), 0);
+            
+            document.getElementById('profileTotalDeposit').textContent = totalDeposit.toLocaleString() + ' 元';
+            document.getElementById('profileTotalWithdraw').textContent = totalWithdraw.toLocaleString() + ' 元';
+            
+            // 訪客模式隱藏修改密碼按鈕
+            const changePasswordBtn = document.getElementById('changePasswordBtn');
+            if (currentUser.isGuest) {
+                changePasswordBtn.style.display = 'none';
+            } else {
+                changePasswordBtn.style.display = 'block';
+            }
             
             const profileModal = new bootstrap.Modal(document.getElementById('profileModal'));
             profileModal.show();
+            
+            // 如果是訪客，顯示註冊提示
+            if (currentUser.isGuest) {
+                setTimeout(() => {
+                    showToast('訪客模式：建議註冊以保存個人資料和遊戲記錄', 'info');
+                }, 500);
+            }
         }
 
         // 顯示修改密碼模態框
@@ -2232,12 +2581,26 @@
             const savedUser = localStorage.getItem('currentUser');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
+                
+                // 檢查訪客是否過期
+                if (currentUser.isGuest && currentUser.guestExpiry) {
+                    const expiryDate = new Date(currentUser.guestExpiry);
+                    if (new Date() > expiryDate) {
+                        // 訪客已過期，清除登入狀態
+                        currentUser = null;
+                        localStorage.removeItem('currentUser');
+                        showToast('訪客登入已過期，請重新登入', 'info');
+                    }
+                }
+                
                 // 更新用戶數據（從 users 列表獲取最新餘額）
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                const user = users.find(u => u.username === currentUser.username);
-                if (user) {
-                    currentUser = user;
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                if (currentUser) {
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const user = users.find(u => u.username === currentUser.username);
+                    if (user) {
+                        currentUser = user;
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    }
                 }
             }
             updateUI();

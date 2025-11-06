@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>皇冠娛樂城 - 專案說明簡報</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.5cm 2cm;
+            }
+            
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                background: white;
+            }
+            
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+            }
+            
+            .cover {
+                margin: 0;
+                padding: 80px 20px;
+                page-break-after: always;
+            }
+            
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            
+            table {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .feature-card,
+            .game-category-card,
+            .stat-card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .flow-diagram,
+            .architecture-diagram,
+            .tech-stack {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .comparison-box {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            ul, ol {
+                page-break-inside: avoid;
+            }
+            
+            img {
+                max-width: 100%;
+                page-break-inside: avoid;
+            }
+            
+            /* 確保顏色在列印時正確顯示 */
+            .cover {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .arch-layer,
+            .feature-card,
+            .game-category-card,
+            .stat-card,
+            .tech-tag {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            /* 隱藏列印提示 */
+            #printHint {
+                display: none !important;
+            }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .cover {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #1a0033 0%, #2d1b69 100%);
+            color: white;
+            margin: -40px -40px 40px -40px;
+        }
+        
+        .cover h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover h2 {
+            font-size: 32px;
+            font-weight: normal;
+            margin-bottom: 40px;
+        }
+        
+        .cover .date {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #2d1b69;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #FFD700;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: #e8e5ea;
+            margin: 30px 0 15px 0;
+        }
+        
+        h3 {
+            font-size: 20px;
+            color: #2d1b69;
+            margin: 25px 0 10px 0;
+        }
+        
+        h4 {
+            font-size: 18px;
+            color: #1a0033;
+            margin: 20px 0 10px 0;
+        }
+        
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+        
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #2d1b69 0%, #1a0033 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        tr:hover {
+            background: #f0f0f0;
+        }
+        
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .toc {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #FFD700;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .toc li::before {
+            content: "• ";
+            color: #FFD700;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .section {
+            margin: 30px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #FFD700;
+            color: #000;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        /* 圖文內容樣式 */
+        .diagram {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .architecture-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .arch-layer {
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .arch-layer.presentation {
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            color: #000;
+        }
+        
+        .arch-layer.business {
+            background: linear-gradient(135deg, #2d1b69, #1a0033);
+        }
+        
+        .arch-layer.data {
+            background: linear-gradient(135deg, #00f3ff, #0099cc);
+            color: #000;
+        }
+        
+        .arch-arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #666;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #2d1b69;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #2d1b69, #1a0033);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .flow-step {
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 25px;
+            margin: 10px 0;
+            font-weight: bold;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .flow-arrow {
+            font-size: 24px;
+            color: #2d1b69;
+            margin: 5px 0;
+        }
+        
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-item {
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .comparison-item.desktop {
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.1), rgba(26, 0, 51, 0.1));
+            border-color: #2d1b69;
+        }
+        
+        .comparison-item.mobile {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(218, 165, 32, 0.1));
+            border-color: #FFD700;
+        }
+        
+        .game-category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .game-category-card {
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.8), rgba(26, 0, 51, 0.8));
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+        
+        .game-category-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #2d1b69, #1a0033);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFD700;
+            margin: 10px 0;
+        }
+        
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .color-swatch.gold {
+            background: #FFD700;
+            color: #000;
+        }
+        
+        .color-swatch.dark-gold {
+            background: #DAA520;
+            color: #000;
+        }
+        
+        .color-swatch.deep-purple {
+            background: #1a0033;
+        }
+        
+        .color-swatch.royal-purple {
+            background: #2d1b69;
+        }
+        
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            color: #666;
+        }
+        
+        .icon-large {
+            font-size: 64px;
+            margin: 20px 0;
+        }
+        
+        /* 列印優化 - 已在上面定義 */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 封面 -->
+        <div class="cover">
+            <div style="font-size: 80px; margin-bottom: 20px;">👑</div>
+            <h1>皇冠娛樂城</h1>
+            <h2>線上娛樂平台專案說明簡報</h2>
+            <div style="margin: 40px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 10px;">
+                    <div style="font-size: 24px;">🎮</div>
+                    <div>8大遊戲分類</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 10px;">
+                    <div style="font-size: 24px;">📱</div>
+                    <div>響應式設計</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 10px;">
+                    <div style="font-size: 24px;">⚙️</div>
+                    <div>完整後台</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 目錄 -->
+        <div class="section">
+            <h1>目錄</h1>
+            <div class="toc">
+                <ul>
+                    <li>1. 專案概述</li>
+                    <li>2. 系統架構</li>
+                    <li>3. 核心功能模組</li>
+                    <li>4. 技術架構</li>
+                    <li>5. 用戶端功能</li>
+                    <li>6. 管理後台功能</li>
+                    <li>7. 遊戲分類</li>
+                    <li>8. 設計特色</li>
+                    <li>9. 技術特點</li>
+                    <li>10. 未來發展</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 1. 專案概述 -->
+        <div class="section">
+            <h1>1. 專案概述</h1>
+            <p>皇冠娛樂城是一個功能完整的線上娛樂平台系統，提供多種遊戲類別和完整的用戶管理、交易管理功能。系統採用響應式設計，支援桌面端和手機端訪問，提供流暢的用戶體驗。</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h4>用戶管理</h4>
+                    <p>完整的註冊、登入、個人資料管理系統</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h4>交易管理</h4>
+                    <p>充值、提款、交易記錄查詢功能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h4>遊戲平台</h4>
+                    <p>8大遊戲分類，豐富的遊戲內容</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h4>優惠活動</h4>
+                    <p>每日簽到、首儲優惠、返水活動</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>響應式設計</h4>
+                    <p>完美適配桌面和手機端</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h4>管理後台</h4>
+                    <p>強大的後台管理功能</p>
+                </div>
+            </div>
+            
+            <h3>專案目標</h3>
+            <ul>
+                <li>提供安全、便捷的線上娛樂平台</li>
+                <li>支援多種遊戲類別和支付方式</li>
+                <li>實現完整的用戶管理系統</li>
+                <li>提供強大的管理後台功能</li>
+                <li>優化移動端用戶體驗</li>
+            </ul>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 2. 系統架構 -->
+        <div class="section">
+            <h1>2. 系統架構</h1>
+            <p>系統採用前端單頁應用架構，主要包含以下部分：</p>
+            
+            <div class="architecture-diagram">
+                <div class="arch-layer presentation">
+                    <div style="font-size: 20px; margin-bottom: 10px;">📱 表現層 (Presentation Layer)</div>
+                    <div>index.html | admin.html | 遊戲頁面</div>
+                    <div style="font-size: 12px; margin-top: 5px;">Bootstrap 5.3.0 | Font Awesome 6.4.0</div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer business">
+                    <div style="font-size: 20px; margin-bottom: 10px;">⚙️ 業務邏輯層 (Business Logic Layer)</div>
+                    <div>common.js | 用戶管理 | 交易管理 | 遊戲邏輯</div>
+                    <div style="font-size: 12px; margin-top: 5px;">JavaScript ES6+ | API 請求 | 狀態管理</div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer data">
+                    <div style="font-size: 20px; margin-bottom: 10px;">🔒 後端 API 層 (Backend API Layer)</div>
+                    <div>RESTful API | 認證授權 | 業務邏輯處理</div>
+                    <div style="font-size: 12px; margin-top: 5px;">Node.js / Python / Java | JWT Token | 數據驗證</div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer" style="background: linear-gradient(135deg, #28a745, #20c997);">
+                    <div style="font-size: 20px; margin-bottom: 10px;">💾 資料庫層 (Database Layer)</div>
+                    <div>MySQL / PostgreSQL / MongoDB</div>
+                    <div style="font-size: 12px; margin-top: 5px;">用戶數據 | 交易記錄 | 管理員帳號 | 加密存儲</div>
+                </div>
+            </div>
+            
+            <h3>2.1 前端結構</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>模組</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>index.html</strong></td>
+                        <td>主頁面，包含用戶登入、註冊、遊戲大廳等功能</td>
+                    </tr>
+                    <tr>
+                        <td><strong>admin.html</strong></td>
+                        <td>管理後台，提供用戶管理、交易管理等功能</td>
+                    </tr>
+                    <tr>
+                        <td><strong>遊戲分類頁面</strong></td>
+                        <td>live.html, sports.html, slots.html 等遊戲專屬頁面</td>
+                    </tr>
+                    <tr>
+                        <td><strong>common.css</strong></td>
+                        <td>共用樣式表，定義統一的視覺風格</td>
+                    </tr>
+                    <tr>
+                        <td><strong>common.js</strong></td>
+                        <td>共用 JavaScript 函數庫</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 3. 核心功能模組 -->
+        <div class="section">
+            <h1>3. 核心功能模組</h1>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">👤 用戶註冊</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">🔐 用戶登入</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">💰 充值/提款</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">🎮 進入遊戲</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">📊 查看記錄</div>
+            </div>
+            
+            <h3>3.1 用戶管理模組</h3>
+            <ul>
+                <li><strong>用戶註冊：</strong>支援帳號、密碼、手機、Email 註冊</li>
+                <li><strong>用戶登入：</strong>安全的登入驗證機制</li>
+                <li><strong>個人資料管理：</strong>查看和修改個人資訊</li>
+                <li><strong>密碼修改：</strong>安全的密碼更換功能</li>
+                <li><strong>VIP 等級系統：</strong>根據投注累積自動升級</li>
+            </ul>
+            
+            <h3>3.2 交易管理模組</h3>
+            <ul>
+                <li><strong>充值功能：</strong>支援銀行轉帳、支付寶、微信支付</li>
+                <li><strong>提款功能：</strong>安全的提款申請和審核流程</li>
+                <li><strong>交易記錄：</strong>完整的交易歷史查詢</li>
+                <li><strong>餘額管理：</strong>即時餘額顯示和更新</li>
+            </ul>
+            
+            <h3>3.3 遊戲模組</h3>
+            <ul>
+                <li><strong>遊戲分類：</strong>8 大遊戲類別，滿足不同玩家需求</li>
+                <li><strong>遊戲過濾：</strong>智能分類和搜索功能</li>
+                <li><strong>遊戲入口：</strong>一鍵進入各種遊戲</li>
+            </ul>
+            
+            <h3>3.4 活動模組</h3>
+            <ul>
+                <li><strong>每日簽到：</strong>每日登入領取獎勵</li>
+                <li><strong>優惠活動：</strong>首儲優惠、返水、推薦好友等</li>
+                <li><strong>促銷跑馬燈：</strong>即時顯示最新優惠資訊</li>
+            </ul>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 4. 技術架構 -->
+        <div class="section">
+            <h1>4. 技術架構</h1>
+            
+            <h3>4.1 前端技術</h3>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript ES6+</span>
+                <span class="tech-tag">Bootstrap 5.3.0</span>
+                <span class="tech-tag">Font Awesome 6.4.0</span>
+                <span class="tech-tag">RESTful API</span>
+                <span class="tech-tag">JWT 認證</span>
+                <span class="tech-tag">後端資料庫</span>
+                <span class="tech-tag">響應式設計</span>
+                <span class="tech-tag">模組化架構</span>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>技術</th>
+                        <th>版本/說明</th>
+                        <th>用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HTML5</td>
+                        <td>最新標準</td>
+                        <td>頁面結構</td>
+                    </tr>
+                    <tr>
+                        <td>CSS3</td>
+                        <td>最新標準</td>
+                        <td>樣式和動畫效果</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript (ES6+)</td>
+                        <td>原生 JS</td>
+                        <td>交互邏輯和功能實現</td>
+                    </tr>
+                    <tr>
+                        <td>Bootstrap</td>
+                        <td>5.3.0</td>
+                        <td>響應式框架和 UI 組件</td>
+                    </tr>
+                    <tr>
+                        <td>Font Awesome</td>
+                        <td>6.4.0</td>
+                        <td>圖標庫</td>
+                    </tr>
+                    <tr>
+                        <td>RESTful API</td>
+                        <td>HTTP/HTTPS</td>
+                        <td>前後端通信</td>
+                    </tr>
+                    <tr>
+                        <td>JWT Token</td>
+                        <td>認證標準</td>
+                        <td>安全認證機制</td>
+                    </tr>
+                    <tr>
+                        <td>後端框架</td>
+                        <td>Node.js / Python</td>
+                        <td>伺服器端邏輯</td>
+                    </tr>
+                    <tr>
+                        <td>資料庫</td>
+                        <td>MySQL / PostgreSQL</td>
+                        <td>數據持久化存儲</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>4.2 後端架構</h3>
+            <p>系統採用前後端分離架構，所有敏感數據存儲在後端資料庫，確保安全性：</p>
+            <ul>
+                <li><strong>後端 API 服務：</strong>處理所有業務邏輯和數據操作</li>
+                <li><strong>資料庫存儲：</strong>使用 MySQL/PostgreSQL 存儲用戶數據、交易記錄等</li>
+                <li><strong>安全認證：</strong>使用 JWT Token 進行用戶身份驗證</li>
+                <li><strong>數據加密：</strong>敏感數據（密碼、個人資訊）採用加密存儲</li>
+                <li><strong>API 安全：</strong>HTTPS 傳輸、請求驗證、防止 SQL 注入和 XSS 攻擊</li>
+            </ul>
+            
+            <div class="diagram" style="background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(32, 201, 151, 0.1)); border-color: #28a745;">
+                <h4 style="text-align: center; color: #28a745; margin-bottom: 15px;">🔒 安全數據流程</h4>
+                <div style="text-align: center; font-size: 14px; line-height: 2;">
+                    <div><strong>前端</strong> → API 請求 (JWT Token)</div>
+                    <div style="font-size: 20px; margin: 10px 0;">↓</div>
+                    <div><strong>後端 API</strong> → 驗證 & 處理業務邏輯</div>
+                    <div style="font-size: 20px; margin: 10px 0;">↓</div>
+                    <div><strong>資料庫</strong> → 加密存儲 & 查詢</div>
+                    <div style="font-size: 20px; margin: 10px 0;">↓</div>
+                    <div><strong>返回結果</strong> → 前端顯示（不包含敏感數據）</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 5. 用戶端功能 -->
+        <div class="section">
+            <h1>5. 用戶端功能</h1>
+            
+            <h3>5.1 主頁功能</h3>
+            <ul>
+                <li><strong>響應式設計：</strong>自動適配桌面和手機螢幕</li>
+                <li><strong>動態背景：</strong>視覺效果豐富的動畫背景</li>
+                <li><strong>遊戲大廳：</strong>8 大遊戲分類卡片展示</li>
+                <li><strong>優惠活動：</strong>展示最新優惠和促銷資訊</li>
+                <li><strong>跑馬燈公告：</strong>即時顯示重要訊息</li>
+            </ul>
+            
+            <h3>5.2 手機端特色</h3>
+            
+            <div class="comparison-box">
+                <div class="comparison-item desktop">
+                    <h4>🖥️ 桌面端</h4>
+                    <ul style="text-align: left;">
+                        <li>完整導航欄</li>
+                        <li>遊戲大廳橫向布局</li>
+                        <li>8欄遊戲卡片展示</li>
+                        <li>Hero Banner 展示</li>
+                        <li>寬螢幕優化</li>
+                    </ul>
+                </div>
+                <div class="comparison-item mobile">
+                    <h4>📱 手機端</h4>
+                    <ul style="text-align: left;">
+                        <li>左側垂直導航</li>
+                        <li>底部導航欄</li>
+                        <li>2x3 遊戲網格</li>
+                        <li>浮動簽到按鈕</li>
+                        <li>觸控優化</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <ul>
+                <li><strong>左側垂直導航：</strong>快速切換遊戲分類</li>
+                <li><strong>底部導航欄：</strong>優惠、帳務、存提、服務、個人中心</li>
+                <li><strong>浮動簽到按鈕：</strong>便捷的每日簽到入口</li>
+                <li><strong>2x3 遊戲網格：</strong>優化的遊戲卡片布局</li>
+            </ul>
+            
+            <h3>5.3 用戶功能</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>功能</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>註冊/登入</td>
+                        <td>完整的用戶註冊和登入系統</td>
+                    </tr>
+                    <tr>
+                        <td>充值</td>
+                        <td>支援多種支付方式，最低 100 元</td>
+                    </tr>
+                    <tr>
+                        <td>提款</td>
+                        <td>安全的提款申請，1-3 個工作天處理</td>
+                    </tr>
+                    <tr>
+                        <td>交易查詢</td>
+                        <td>完整的交易記錄，支援分類篩選</td>
+                    </tr>
+                    <tr>
+                        <td>每日簽到</td>
+                        <td>每日登入領取 50-150 元隨機獎勵</td>
+                    </tr>
+                    <tr>
+                        <td>個人中心</td>
+                        <td>查看個人資料、修改密碼等功能</td>
+                    </tr>
+                    <tr>
+                        <td>客服服務</td>
+                        <td>電話、WhatsApp、Telegram 多管道客服</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 6. 管理後台功能 -->
+        <div class="section">
+            <h1>6. 管理後台功能</h1>
+            
+            <h3>6.1 登入系統</h3>
+            <ul>
+                <li><strong>管理員帳號認證：</strong>預設帳號 admin/admin123</li>
+                <li><strong>登入狀態保持：</strong>自動記住登入狀態</li>
+                <li><strong>安全登出：</strong>登出時清除登入資訊</li>
+            </ul>
+            
+            <h3>6.2 儀表板</h3>
+            
+            <div class="stats-box">
+                <div class="stat-card">
+                    <div>👥 總用戶數</div>
+                    <div class="stat-number">N</div>
+                    <div>所有註冊用戶</div>
+                </div>
+                <div class="stat-card">
+                    <div>💰 總餘額</div>
+                    <div class="stat-number">¥0</div>
+                    <div>所有用戶餘額總和</div>
+                </div>
+                <div class="stat-card">
+                    <div>📊 總交易數</div>
+                    <div class="stat-number">N</div>
+                    <div>系統交易記錄</div>
+                </div>
+                <div class="stat-card">
+                    <div>📈 今日新增</div>
+                    <div class="stat-number">N</div>
+                    <div>當天註冊用戶</div>
+                </div>
+            </div>
+            
+            <ul>
+                <li><strong>總用戶數：</strong>統計所有註冊用戶</li>
+                <li><strong>總餘額：</strong>所有用戶的總餘額</li>
+                <li><strong>總交易數：</strong>系統所有交易記錄數量</li>
+                <li><strong>總充值：</strong>累計充值金額統計</li>
+                <li><strong>總提款：</strong>累計提款金額統計</li>
+                <li><strong>今日新增用戶：</strong>當天註冊的用戶數量</li>
+            </ul>
+            
+            <h3>6.3 用戶管理</h3>
+            <ul>
+                <li><strong>用戶列表：</strong>顯示所有註冊用戶資訊</li>
+                <li><strong>用戶搜索：</strong>支援帳號、手機、Email 搜索</li>
+                <li><strong>編輯用戶：</strong>修改用戶資訊（開發中）</li>
+                <li><strong>調整餘額：</strong>管理員可手動調整用戶餘額</li>
+            </ul>
+            
+            <h3>6.4 交易管理</h3>
+            <ul>
+                <li><strong>交易列表：</strong>顯示所有交易記錄</li>
+                <li><strong>交易篩選：</strong>按類型篩選（全部、充值、提款、投注、中獎）</li>
+                <li><strong>交易搜索：</strong>按用戶名和類型搜索</li>
+                <li><strong>提款審核：</strong>審核通過待處理的提款申請</li>
+            </ul>
+            
+            <h3>6.5 其他功能</h3>
+            <ul>
+                <li><strong>遊戲管理：</strong>遊戲類別管理（開發中）</li>
+                <li><strong>優惠管理：</strong>優惠活動管理（開發中）</li>
+                <li><strong>報表統計：</strong>數據統計和分析（開發中）</li>
+            </ul>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 7. 遊戲分類 -->
+        <div class="section">
+            <h1>7. 遊戲分類</h1>
+            
+            <div class="game-category-grid">
+                <div class="game-category-card">
+                    <div class="game-category-icon">👔</div>
+                    <div><strong>真人視訊</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">live.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">⚽</div>
+                    <div><strong>體育競技</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">sports.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">♟️</div>
+                    <div><strong>棋牌遊戲</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">chess.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">🎰</div>
+                    <div><strong>電子遊藝</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">slots.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">🎫</div>
+                    <div><strong>彩票投注</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">lottery.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">🐟</div>
+                    <div><strong>捕魚機台</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">fishing.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">📺</div>
+                    <div><strong>娛樂直播</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">streaming.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">🏆</div>
+                    <div><strong>電競賽事</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">esports.html</div>
+                </div>
+                <div class="game-category-card">
+                    <div class="game-category-icon">🎲</div>
+                    <div><strong>Bet365</strong></div>
+                    <div style="font-size: 12px; margin-top: 5px;">bet365.html</div>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>遊戲類別</th>
+                        <th>頁面</th>
+                        <th>遊戲內容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>真人視訊</td>
+                        <td>live.html</td>
+                        <td>美女荷官、百家樂、龍虎、輪盤</td>
+                    </tr>
+                    <tr>
+                        <td>體育競技</td>
+                        <td>sports.html</td>
+                        <td>足球、籃球、電競、賽事直播</td>
+                    </tr>
+                    <tr>
+                        <td>棋牌遊戲</td>
+                        <td>chess.html</td>
+                        <td>德州撲克、麻將、鬥地主</td>
+                    </tr>
+                    <tr>
+                        <td>電子遊藝</td>
+                        <td>slots.html</td>
+                        <td>老虎機、水果機、爆分機台</td>
+                    </tr>
+                    <tr>
+                        <td>彩票投注</td>
+                        <td>lottery.html</td>
+                        <td>時時彩、快3、北京賽車</td>
+                    </tr>
+                    <tr>
+                        <td>捕魚機台</td>
+                        <td>fishing.html</td>
+                        <td>千炮捕魚、深海狩獵、高倍獎金</td>
+                    </tr>
+                    <tr>
+                        <td>娛樂直播</td>
+                        <td>streaming.html</td>
+                        <td>美女主播、互動遊戲、送禮</td>
+                    </tr>
+                    <tr>
+                        <td>電競賽事</td>
+                        <td>esports.html</td>
+                        <td>LOL、DOTA2、CS:GO 投注</td>
+                    </tr>
+                    <tr>
+                        <td>Bet365</td>
+                        <td>bet365.html</td>
+                        <td>Bet365 體育投注平台</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 8. 設計特色 -->
+        <div class="section">
+            <h1>8. 設計特色</h1>
+            
+            <h3>8.1 視覺設計</h3>
+            
+            <div class="color-palette">
+                <div class="color-swatch gold">
+                    <div>#FFD700</div>
+                    <div>金色</div>
+                </div>
+                <div class="color-swatch dark-gold">
+                    <div>#DAA520</div>
+                    <div>深金色</div>
+                </div>
+                <div class="color-swatch deep-purple">
+                    <div>#1a0033</div>
+                    <div>深紫色</div>
+                </div>
+                <div class="color-swatch royal-purple">
+                    <div>#2d1b69</div>
+                    <div>皇家紫</div>
+                </div>
+            </div>
+            
+            <ul>
+                <li><strong>主題色彩：</strong>金色（#FFD700）搭配深紫色（#1a0033），營造高貴奢華感</li>
+                <li><strong>漸變效果：</strong>大量使用漸變背景，增強視覺層次</li>
+                <li><strong>動畫效果：</strong>浮動背景、按鈕動畫、卡片懸停效果</li>
+                <li><strong>響應式設計：</strong>完美適配桌面和手機端</li>
+            </ul>
+            
+            <div class="screenshot-placeholder">
+                <div class="icon-large">🎨</div>
+                <div><strong>視覺設計範例</strong></div>
+                <div style="font-size: 12px; margin-top: 10px;">漸變背景、金色邊框、動畫效果</div>
+            </div>
+            
+            <h3>8.2 用戶體驗</h3>
+            <ul>
+                <li><strong>直觀導航：</strong>清晰的導航結構，易於使用</li>
+                <li><strong>即時反饋：</strong>Toast 通知、加載動畫等即時狀態提示</li>
+                <li><strong>快速操作：</strong>一鍵登入、快速充值、便捷簽到</li>
+                <li><strong>數據驗證：</strong>完整的表單驗證和錯誤提示</li>
+            </ul>
+            
+            <h3>8.3 功能完整性</h3>
+            <ul>
+                <li>完整的用戶生命週期管理</li>
+                <li>完整的交易流程管理</li>
+                <li>完整的後台管理系統</li>
+                <li>豐富的遊戲分類和入口</li>
+            </ul>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 9. 技術特點 -->
+        <div class="section">
+            <h1>9. 技術特點</h1>
+            
+            <h3>9.1 前端技術亮點</h3>
+            <ul>
+                <li><strong>前後端分離：</strong>前端專注於 UI/UX，後端處理業務邏輯</li>
+                <li><strong>模組化設計：</strong>共用 CSS 和 JS 文件，便於維護</li>
+                <li><strong>響應式布局：</strong>使用 Bootstrap 實現完美適配</li>
+                <li><strong>動態交互：</strong>豐富的 JavaScript 交互效果</li>
+                <li><strong>API 整合：</strong>通過 RESTful API 與後端通信</li>
+            </ul>
+            
+            <h3>9.2 後端數據管理</h3>
+            <ul>
+                <li><strong>資料庫存儲：</strong>使用 MySQL/PostgreSQL 進行數據持久化</li>
+                <li><strong>數據結構化：</strong>統一的數據模型和命名規範</li>
+                <li><strong>狀態管理：</strong>後端統一管理用戶狀態和會話</li>
+                <li><strong>數據備份：</strong>定期備份機制，確保數據安全</li>
+                <li><strong>事務處理：</strong>確保數據一致性和完整性</li>
+            </ul>
+            
+            <h3>9.3 安全性設計</h3>
+            <ul>
+                <li><strong>密碼加密：</strong>使用 bcrypt/Argon2 進行密碼雜湊存儲</li>
+                <li><strong>JWT 認證：</strong>無狀態的 Token 認證機制</li>
+                <li><strong>HTTPS 傳輸：</strong>所有數據傳輸採用 HTTPS 加密</li>
+                <li><strong>SQL 注入防護：</strong>使用參數化查詢和 ORM 框架</li>
+                <li><strong>XSS 防護：</strong>輸入驗證和輸出轉義</li>
+                <li><strong>CSRF 防護：</strong>Token 驗證機制</li>
+                <li><strong>API 限流：</strong>防止惡意請求攻擊</li>
+                <li><strong>敏感數據加密：</strong>個人資訊、銀行帳號等敏感數據加密存儲</li>
+                <li><strong>日誌記錄：</strong>完整的操作日誌，便於審計和追蹤</li>
+            </ul>
+            
+            <div class="diagram" style="background: linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(255, 193, 7, 0.1)); border-color: #dc3545;">
+                <h4 style="text-align: center; color: #dc3545; margin-bottom: 15px;">🛡️ 安全防護層級</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 13px;">
+                    <div style="padding: 10px; background: rgba(255,255,255,0.5); border-radius: 5px;">
+                        <strong>🔐 認證層</strong><br>JWT Token<br>密碼驗證
+                    </div>
+                    <div style="padding: 10px; background: rgba(255,255,255,0.5); border-radius: 5px;">
+                        <strong>🔒 加密層</strong><br>HTTPS<br>數據加密
+                    </div>
+                    <div style="padding: 10px; background: rgba(255,255,255,0.5); border-radius: 5px;">
+                        <strong>🛡️ 防護層</strong><br>SQL 注入防護<br>XSS 防護
+                    </div>
+                    <div style="padding: 10px; background: rgba(255,255,255,0.5); border-radius: 5px;">
+                        <strong>📊 監控層</strong><br>日誌記錄<br>異常檢測
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 10. 未來發展 -->
+        <div class="section">
+            <h1>10. 未來發展</h1>
+            
+            <h3>10.1 後端架構實現（必要）</h3>
+            <ul>
+                <li><strong>後端框架選擇：</strong>Node.js (Express/Nest.js) / Python (Django/FastAPI) / Java (Spring Boot)</li>
+                <li><strong>資料庫設計：</strong>MySQL/PostgreSQL 關係型資料庫，確保數據完整性和一致性</li>
+                <li><strong>API 設計：</strong>RESTful API 或 GraphQL，標準化的接口設計</li>
+                <li><strong>認證系統：</strong>JWT Token 認證，支援 Token 刷新機制</li>
+                <li><strong>數據加密：</strong>敏感數據（密碼、個人資訊）使用 AES-256 加密存儲</li>
+                <li><strong>安全防護：</strong>實現完整的 SQL 注入、XSS、CSRF 防護機制</li>
+            </ul>
+            
+            <h3>10.2 前端技術升級</h3>
+            <ul>
+                <li><strong>框架升級：</strong>考慮使用 React/Vue 等現代框架</li>
+                <li><strong>狀態管理：</strong>使用 Redux/Vuex 等狀態管理工具</li>
+                <li><strong>API 客戶端：</strong>Axios/Fetch 封裝，統一處理 API 請求</li>
+                <li><strong>構建工具：</strong>使用 Webpack/Vite 等構建工具</li>
+                <li><strong>測試框架：</strong>添加單元測試和 E2E 測試</li>
+            </ul>
+            
+            <h3>10.3 安全與合規</h3>
+            <ul>
+                <li><strong>數據隱私保護：</strong>符合 GDPR、個資法等法規要求</li>
+                <li><strong>安全審計：</strong>定期安全漏洞掃描和滲透測試</li>
+                <li><strong>備份策略：</strong>自動化數據備份，災難恢復機制</li>
+                <li><strong>監控告警：</strong>實時監控系統異常和安全事件</li>
+                <li><strong>訪問控制：</strong>RBAC 角色權限管理系統</li>
+            </ul>
+            
+            <h3>10.4 功能完善</h3>
+            <ul>
+                <li><strong>遊戲管理：</strong>完整的遊戲類別和內容管理</li>
+                <li><strong>優惠管理：</strong>靈活的優惠活動配置系統</li>
+                <li><strong>報表統計：</strong>詳細的數據分析和報表生成</li>
+                <li><strong>消息系統：</strong>站內消息和通知系統</li>
+                <li><strong>多語言支援：</strong>國際化功能</li>
+                <li><strong>支付整合：</strong>連接真實的支付閘道（加密傳輸）</li>
+                <li><strong>遊戲平台整合：</strong>接入真實的遊戲供應商 API</li>
+            </ul>
+            
+            <h3>10.5 性能優化</h3>
+            <ul>
+                <li><strong>資料庫優化：</strong>索引優化、查詢優化、讀寫分離</li>
+                <li><strong>緩存策略：</strong>Redis 緩存熱點數據，減少資料庫壓力</li>
+                <li><strong>API 優化：</strong>接口響應時間優化，批量查詢</li>
+                <li><strong>前端優化：</strong>代碼分割、圖片懶加載、CDN 加速</li>
+                <li><strong>負載均衡：</strong>多伺服器部署，負載均衡分配請求</li>
+            </ul>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- 總結 -->
+        <div class="section">
+            <h1>總結</h1>
+            <p>皇冠娛樂城是一個功能完整、設計精美的線上娛樂平台系統。系統採用<strong>前後端分離架構</strong>，前端專注於用戶體驗，後端負責業務邏輯和數據管理。所有敏感數據存儲在後端資料庫中，確保數據安全和隱私保護。</p>
+            
+            <div class="diagram" style="background: linear-gradient(135deg, rgba(45, 27, 105, 0.1), rgba(255, 215, 0, 0.1)); border-color: #2d1b69;">
+                <h4 style="text-align: center; color: #2d1b69; margin-bottom: 15px;">📋 系統核心特點</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; font-size: 13px;">
+                    <div style="padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 8px;">🔒</div>
+                        <strong>安全優先</strong><br>
+                        <small>後端資料庫<br>加密存儲</small>
+                    </div>
+                    <div style="padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 8px;">⚡</div>
+                        <strong>高性能</strong><br>
+                        <small>優化架構<br>快速響應</small>
+                    </div>
+                    <div style="padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 8px;">📈</div>
+                        <strong>可擴展</strong><br>
+                        <small>模組化設計<br>易於維護</small>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px;">系統架構清晰，代碼結構良好，採用業界最佳實踐，為後續的功能擴展和技術升級奠定了良好的基礎。通過後端資料庫管理，確保了數據的安全性、完整性和可靠性。</p>
+        </div>
+        
+        
+    </div>
+    
+        <!-- 列印提示（僅在瀏覽器中顯示，列印時隱藏） -->
+        <div style="position: fixed; bottom: 20px; right: 20px; background: rgba(45, 27, 105, 0.9); color: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999; max-width: 300px; display: none;" id="printHint">
+            <div style="font-weight: bold; margin-bottom: 8px;">📄 列印為 PDF 提示</div>
+            <div style="font-size: 12px; line-height: 1.6;">
+                <div>1. 按 <strong>Ctrl+P</strong> (Windows) 或 <strong>Cmd+P</strong> (Mac)</div>
+                <div>2. 選擇「另存為 PDF」或「Microsoft Print to PDF」</div>
+                <div>3. 選擇 <strong>A4</strong> 紙張大小</div>
+                <div>4. 啟用「背景圖形」選項以顯示顏色</div>
+                <div style="margin-top: 8px; text-align: center;">
+                    <button onclick="document.getElementById('printHint').style.display='none';" style="background: #FFD700; color: #000; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">知道了</button>
+                </div>
+            </div>
+        </div>
+    
+    <script>
+        // 設置當前日期
+        const now = new Date();
+        const dateStr = now.getFullYear() + '年' + 
+                       String(now.getMonth() + 1).padStart(2, '0') + '月' + 
+                       String(now.getDate()).padStart(2, '0') + '日';
+        const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
+                       String(now.getMinutes()).padStart(2, '0') + ':' + 
+                       String(now.getSeconds()).padStart(2, '0');
+        
+        const currentDateEl = document.getElementById('currentDate');
+        if (currentDateEl) {
+            currentDateEl.textContent = dateStr;
+        }
+        
+        // 顯示列印提示（僅在非列印模式下）
+        if (window.matchMedia) {
+            const printMediaQuery = window.matchMedia('print');
+            if (!printMediaQuery.matches) {
+                const printHint = document.getElementById('printHint');
+                if (printHint) {
+                    printHint.style.display = 'block';
+                    // 5秒後自動隱藏
+                    setTimeout(() => {
+                        if (printHint) printHint.style.display = 'none';
+                    }, 10000);
+                }
+            }
+        }
+        
+        // 監聽列印事件
+        window.addEventListener('beforeprint', function() {
+            document.getElementById('printHint').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
+
