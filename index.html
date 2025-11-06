@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>皇冠娛樂城 - 頂級線上娛樂平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #FFD700;
+            --dark-gold: #DAA520;
+            --deep-purple: #1a0033;
+            --royal-purple: #2d1b69;
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff006e;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0015 0%, #1a0033 50%, #0f001f 100%);
+            color: #fff;
+            font-family: 'Microsoft JhengHei', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--neon-blue) 0%, transparent 70%);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .bg-animation span:nth-child(1) { width: 100px; height: 100px; top: 10%; left: 10%; animation-delay: 0s; }
+        .bg-animation span:nth-child(2) { width: 150px; height: 150px; top: 60%; left: 80%; animation-delay: 3s; }
+        .bg-animation span:nth-child(3) { width: 80px; height: 80px; top: 80%; left: 20%; animation-delay: 6s; background: radial-gradient(circle, var(--neon-pink) 0%, transparent 70%); }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 5px 0;
+            border-bottom: 2px solid var(--gold);
+            font-size: 0.9rem;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--gold), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .balance-display {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #000;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-login, .btn-register {
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid var(--gold);
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-login:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: #000;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.9); }
+        }
+
+        /* Marquee */
+        .marquee-container {
+            background: linear-gradient(90deg, rgba(255, 0, 110, 0.2), rgba(0, 243, 255, 0.2));
+            padding: 10px 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .marquee {
+            display: block;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* 桌面版和手機版顯示切換 */
+        .desktop-marquee {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            gap: 50px;
+        }
+
+        .mobile-promo-blocks {
+            display: none;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.8), rgba(26, 0, 51, 0.9));
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--gold), #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Game Categories */
+        .game-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.6), rgba(26, 0, 51, 0.8));
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold), var(--neon-blue));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4), 0 0 40px rgba(0, 243, 255, 0.3);
+        }
+
+        .game-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 20px currentColor);
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-card:nth-child(1) .game-icon { color: #ff6b6b; }
+        .game-card:nth-child(2) .game-icon { color: #4ecdc4; }
+        .game-card:nth-child(3) .game-icon { color: #ffe66d; }
+        .game-card:nth-child(4) .game-icon { color: #a8e6cf; }
+        .game-card:nth-child(5) .game-icon { color: #ff8b94; }
+        .game-card:nth-child(6) .game-icon { color: #c7ceea; }
+        .game-card:nth-child(7) .game-icon { color: #ffd3b6; }
+        .game-card:nth-child(8) .game-icon { color: #dcedc1; }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--neon-pink);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Promotions */
+        .promotions {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(0, 243, 255, 0.1));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.8), rgba(26, 0, 51, 0.9));
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .promo-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Modal */
+        .modal-content {
+            background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            color: #fff;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--gold);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Toast 通知樣式 */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .toast-custom {
+            background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            color: #fff;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        .toast-custom.success {
+            border-color: #28a745;
+        }
+
+        .toast-custom.error {
+            border-color: #dc3545;
+        }
+
+        .toast-custom.warning {
+            border-color: #ffc107;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* 加載動畫 */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+            border-top: 2px solid var(--gold);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        /* Mobile Layout - 手機模式 */
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 70px; /* 為底部導航欄留空間 */
+            }
+
+            /* 隱藏桌面版 top-bar */
+            .top-bar {
+                display: none;
+            }
+
+            /* 手機版 Header - 緊湊設計 */
+            .main-header {
+                padding: 10px 15px;
+                background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+            }
+
+            .main-header .row {
+                margin: 0;
+            }
+
+            .main-header .col-md-3,
+            .main-header .col-md-6,
+            .main-header .col-md-3 {
+                padding: 0;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .balance-display {
+                padding: 5px 12px;
+                font-size: 0.85rem;
+                margin: 5px 0;
+            }
+
+            .btn-login, .btn-register {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+
+            /* 公告欄 - 手機版與桌面版相同樣式 */
+            .marquee-container {
+                background: linear-gradient(90deg, rgba(255, 0, 110, 0.2), rgba(0, 243, 255, 0.2));
+                padding: 10px 0;
+                overflow: hidden;
+                border-top: 1px solid rgba(255, 215, 0, 0.3);
+                border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            }
+
+            .marquee {
+                display: block;
+            }
+
+            /* 隱藏桌面版跑馬燈 */
+            .desktop-marquee {
+                display: none;
+            }
+
+            /* 手機版跑馬燈 - 與桌面版相同 */
+            .mobile-promo-blocks {
+                display: flex;
+                animation: scroll 20s linear infinite;
+                gap: 50px;
+                white-space: nowrap;
+            }
+
+            .mobile-promo-blocks span {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: #fff;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            .mobile-promo-blocks span i {
+                font-size: 1rem;
+            }
+
+            /* Hero Banner - 手機版隱藏 */
+            .hero-banner {
+                display: none;
+            }
+
+            /* 浮動簽到圖標 - 手機版 */
+            .floating-checkin-btn {
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+                cursor: pointer;
+                z-index: 999;
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                animation: pulse-glow-fab 2s infinite;
+            }
+
+            .floating-checkin-btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.5);
+            }
+
+            .floating-checkin-btn:active {
+                transform: scale(0.95);
+            }
+
+            .floating-checkin-btn i {
+                font-size: 1.8rem;
+                color: #000;
+            }
+
+            @keyframes pulse-glow-fab {
+                0%, 100% {
+                    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+                }
+                50% {
+                    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.5);
+                }
+            }
+
+            /* 浮動按鈕標籤 */
+            .floating-checkin-label {
+                position: fixed;
+                bottom: 155px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #fff;
+                padding: 8px 12px;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                white-space: nowrap;
+                z-index: 998;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s;
+                border: 1px solid rgba(255, 215, 0, 0.3);
+            }
+
+            .floating-checkin-btn:hover + .floating-checkin-label {
+                opacity: 1;
+            }
+
+            /* 主容器改為 flex 布局 */
+            .container {
+                padding: 0;
+            }
+
+            /* 手機版布局容器 */
+            .mobile-layout-container {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            /* 左側垂直導航菜單 */
+            .left-sidebar {
+                width: 80px;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 0 15px 15px 0;
+                padding: 15px 5px;
+                position: sticky;
+                top: 60px;
+                height: calc(100vh - 140px);
+                overflow-y: auto;
+                z-index: 100;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 12px 5px;
+                margin-bottom: 8px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s;
+                color: #333;
+                text-decoration: none;
+            }
+
+            .sidebar-item.active {
+                background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+                color: #000;
+            }
+
+            .sidebar-item:not(.active):hover {
+                background: rgba(255, 215, 0, 0.2);
+            }
+
+            .sidebar-icon {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+
+            .sidebar-text {
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+
+            /* 主內容區域 */
+            .main-content {
+                flex: 1;
+                padding: 15px;
+                min-width: 0;
+            }
+
+            /* 遊戲類別標題 - 手機版調整 */
+            .mobile-game-title {
+                display: block;
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            /* 遊戲卡片 - 改為 2x3 網格 */
+            .game-categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                margin: 0;
+            }
+
+            .game-card {
+                padding: 15px;
+                border-radius: 15px;
+                aspect-ratio: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                background: linear-gradient(135deg, rgba(255, 240, 220, 0.9), rgba(255, 230, 200, 0.9));
+                border: 1px solid rgba(255, 215, 0, 0.3);
+            }
+
+            .game-card::before {
+                display: none;
+            }
+
+            .game-card:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            }
+
+            .game-icon {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+
+            .game-title {
+                font-size: 1rem;
+                color: #333;
+                margin-bottom: 5px;
+            }
+
+            .game-desc {
+                font-size: 0.75rem;
+                color: #666;
+                opacity: 1;
+            }
+
+            .game-badge {
+                top: 8px;
+                right: 8px;
+                padding: 4px 8px;
+                font-size: 0.65rem;
+            }
+
+            /* 優惠活動區域在手機版默認隱藏，點擊底部導航時顯示 */
+            .promotions {
+                display: none;
+                margin: 15px;
+                padding: 20px;
+            }
+
+            .promotions.show {
+                display: block;
+            }
+
+            /* 底部導航欄 */
+            .bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+                border-top: 2px solid var(--gold);
+                padding: 8px 0;
+                z-index: 1000;
+                box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .bottom-nav-items {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .bottom-nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+                padding: 5px 10px;
+                border-radius: 10px;
+                transition: all 0.3s;
+                flex: 1;
+            }
+
+            .bottom-nav-item.active {
+                color: var(--gold);
+            }
+
+            .bottom-nav-item:active {
+                background: rgba(255, 215, 0, 0.2);
+            }
+
+            .bottom-nav-icon {
+                font-size: 1.3rem;
+                margin-bottom: 3px;
+            }
+
+            .bottom-nav-item.active .bottom-nav-icon {
+                transform: scale(1.1);
+            }
+
+            .bottom-nav-text {
+                font-size: 0.7rem;
+            }
+
+            .bottom-nav-item.active .bottom-nav-icon {
+                position: relative;
+            }
+
+            .bottom-nav-item.active .bottom-nav-icon::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 30px;
+                height: 3px;
+                background: var(--gold);
+                border-radius: 2px;
+            }
+
+            /* 中間按鈕特殊樣式（存提） */
+            .bottom-nav-item.deposit-btn {
+                position: relative;
+            }
+
+            .bottom-nav-item.deposit-btn.active::before {
+                content: '';
+                position: absolute;
+                top: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 50px;
+                border: 3px solid var(--gold);
+                border-radius: 50%;
+                background: linear-gradient(135deg, rgba(26, 0, 51, 0.98), rgba(45, 27, 105, 0.95));
+                z-index: -1;
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+
+            .bottom-nav-item.deposit-btn .bottom-nav-icon {
+                font-size: 1.8rem;
+                background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        /* 桌面版隱藏手機版元素，顯示桌面版遊戲選單 */
+        @media (min-width: 769px) {
+            .left-sidebar,
+            .bottom-nav,
+            .mobile-layout-container,
+            .floating-checkin-btn,
+            .floating-checkin-label {
+                display: none;
+            }
+            
+            .desktop-game-section {
+                display: block;
+            }
+        }
+
+        /* 手機版隱藏桌面版遊戲選單 */
+        @media (max-width: 768px) {
+            .desktop-game-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-phone-alt me-2"></i>24小時客服: 400-888-8888
+                </div>
+                <div>
+                    <i class="fas fa-envelope me-2"></i>service@casino.com
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <i class="fas fa-crown"></i> 皇冠娛樂城
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div id="balanceSection" style="display: none;">
+                        <div class="balance-display">
+                            <i class="fas fa-wallet me-2"></i>
+                            餘額: <span id="userBalance">0</span> 元
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-end">
+                    <div id="authButtons">
+                        <button class="btn btn-login me-2" onclick="showLogin()">
+                            <i class="fas fa-sign-in-alt"></i> 登入
+                        </button>
+                        <button class="btn btn-register" onclick="showRegister()">
+                            <i class="fas fa-user-plus"></i> 註冊
+                        </button>
+                    </div>
+                    <div id="userMenu" style="display: none;">
+                        <div class="dropdown">
+                            <button class="btn btn-login dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> <span id="username"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" onclick="showDeposit()">
+                                    <i class="fas fa-plus-circle"></i> 充值
+                                </a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showWithdraw()">
+                                    <i class="fas fa-minus-circle"></i> 提款
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="logout()">
+                                    <i class="fas fa-sign-out-alt"></i> 登出
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <!-- 桌面版：滾動跑馬燈 -->
+            <div class="desktop-marquee">
+                <span><i class="fas fa-bullhorn text-warning"></i> 歡迎來到皇冠娛樂城！首次充值贈送100%紅利！</span>
+                <span><i class="fas fa-gift text-success"></i> 每日簽到送積分，連續簽到獎勵加倍！</span>
+                <span><i class="fas fa-trophy text-danger"></i> 週週返水最高0.8%，無上限！</span>
+                <span><i class="fas fa-star text-info"></i> VIP會員專屬禮遇，升級送豪禮！</span>
+                <span><i class="fas fa-bullhorn text-warning"></i> 歡迎來到皇冠娛樂城！首次充值贈送100%紅利！</span>
+                <span><i class="fas fa-gift text-success"></i> 每日簽到送積分，連續簽到獎勵加倍！</span>
+            </div>
+            <!-- 手機版：水平滾動跑馬燈 - 與桌面版相同 -->
+            <div class="mobile-promo-blocks">
+                <span><i class="fas fa-bullhorn text-warning"></i> 歡迎來到皇冠娛樂城！首次充值贈送100%紅利！</span>
+                <span><i class="fas fa-gift text-success"></i> 每日簽到送積分，連續簽到獎勵加倍！</span>
+                <span><i class="fas fa-trophy text-danger"></i> 週週返水最高0.8%，無上限！</span>
+                <span><i class="fas fa-star text-info"></i> VIP會員專屬禮遇，升級送豪禮！</span>
+                <span><i class="fas fa-bullhorn text-warning"></i> 歡迎來到皇冠娛樂城！首次充值贈送100%紅利！</span>
+                <span><i class="fas fa-gift text-success"></i> 每日簽到送積分，連續簽到獎勵加倍！</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="container">
+        <div class="hero-banner">
+            <h1 class="hero-title mb-4">每日簽到禮</h1>
+            <p class="lead mb-4">天天贈彩點</p>
+            <button class="btn btn-register btn-lg px-5" onclick="showCheckIn()">
+                點擊進入每日簽到
+            </button>
+        </div>
+
+        <!-- 手機版浮動簽到按鈕 -->
+        <div class="floating-checkin-btn" onclick="showCheckIn()">
+            <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="floating-checkin-label">每日簽到禮</div>
+
+        <!-- 手機版布局容器 -->
+        <div class="mobile-layout-container">
+            <!-- 左側垂直導航菜單 -->
+            <div class="left-sidebar">
+                <div class="sidebar-item active" onclick="filterGames('popular', this)">
+                    <div class="sidebar-icon"><i class="fas fa-fire"></i></div>
+                    <div class="sidebar-text">熱門</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('ku', this)">
+                    <div class="sidebar-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="sidebar-text">KU</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('slots', this)">
+                    <div class="sidebar-icon"><i class="fas fa-dice"></i></div>
+                    <div class="sidebar-text">電子</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('live', this)">
+                    <div class="sidebar-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="sidebar-text">真人</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('sports', this)">
+                    <div class="sidebar-icon"><i class="fas fa-futbol"></i></div>
+                    <div class="sidebar-text">體育</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('lottery', this)">
+                    <div class="sidebar-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <div class="sidebar-text">彩球</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('chess', this)">
+                    <div class="sidebar-icon"><i class="fas fa-chess"></i></div>
+                    <div class="sidebar-text">棋牌</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('fishing', this)">
+                    <div class="sidebar-icon"><i class="fas fa-fish"></i></div>
+                    <div class="sidebar-text">捕魚</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('esports', this)">
+                    <div class="sidebar-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="sidebar-text">電競</div>
+                </div>
+            </div>
+
+            <!-- 主內容區域 - 手機版 -->
+            <div class="main-content">
+                <!-- Game Categories -->
+                <h2 class="text-center mb-4 mobile-game-title">
+                    <i class="fas fa-gamepad me-2"></i>遊戲大廳
+                </h2>
+                <div class="game-categories mobile-game-categories">
+            <!-- 真人 -->
+            <div class="game-card" data-category="live" onclick="openGame('live')">
+                <span class="game-badge">HOT</span>
+                <div class="game-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 class="game-title">真人視訊</h3>
+                <p class="game-desc">美女荷官 百家樂 龍虎 輪盤</p>
+            </div>
+
+            <!-- 體育 -->
+            <div class="game-card" data-category="sports" onclick="openGame('sports')">
+                <span class="game-badge">NEW</span>
+                <div class="game-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <h3 class="game-title">體育競技</h3>
+                <p class="game-desc">足球 籃球 電競 賽事直播</p>
+            </div>
+
+            <!-- 棋牌 -->
+            <div class="game-card" data-category="chess" onclick="openGame('chess')">
+                <div class="game-icon">
+                    <i class="fas fa-chess"></i>
+                </div>
+                <h3 class="game-title">棋牌遊戲</h3>
+                <p class="game-desc">德州撲克 麻將 鬥地主</p>
+            </div>
+
+            <!-- 電子 -->
+            <div class="game-card" data-category="slots" onclick="openGame('slots')">
+                <span class="game-badge">HOT</span>
+                <div class="game-icon">
+                    <i class="fas fa-dice"></i>
+                </div>
+                <h3 class="game-title">電子遊藝</h3>
+                <p class="game-desc">老虎機 水果機 爆分機台</p>
+            </div>
+
+            <!-- 彩票 -->
+            <div class="game-card" data-category="lottery" onclick="openGame('lottery')">
+                <div class="game-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h3 class="game-title">彩票投注</h3>
+                <p class="game-desc">時時彩 快3 北京賽車</p>
+            </div>
+
+            <!-- 捕魚 -->
+            <div class="game-card" data-category="fishing" onclick="openGame('fishing')">
+                <div class="game-icon">
+                    <i class="fas fa-fish"></i>
+                </div>
+                <h3 class="game-title">捕魚機台</h3>
+                <p class="game-desc">千炮捕魚 深海狩獵 高倍獎金</p>
+            </div>
+
+            <!-- 直播 -->
+            <div class="game-card" data-category="streaming" onclick="openGame('streaming')">
+                <span class="game-badge">NEW</span>
+                <div class="game-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="game-title">娛樂直播</h3>
+                <p class="game-desc">美女主播 互動遊戲 送禮</p>
+            </div>
+
+            <!-- 電競 -->
+            <div class="game-card" data-category="esports" onclick="openGame('esports')">
+                <div class="game-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="game-title">電競賽事</h3>
+                <p class="game-desc">LOL DOTA2 CS:GO 投注</p>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 桌面版遊戲選單 -->
+        <div class="desktop-game-section">
+            <!-- Game Categories -->
+            <h2 class="text-center mb-4">
+                <i class="fas fa-gamepad me-2"></i>遊戲大廳
+            </h2>
+            <div class="game-categories">
+                <!-- 真人 -->
+                <div class="game-card" data-category="live" onclick="openGame('live')">
+                    <span class="game-badge">HOT</span>
+                    <div class="game-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="game-title">真人視訊</h3>
+                    <p class="game-desc">美女荷官 百家樂 龍虎 輪盤</p>
+                </div>
+
+                <!-- 體育 -->
+                <div class="game-card" data-category="sports" onclick="openGame('sports')">
+                    <span class="game-badge">NEW</span>
+                    <div class="game-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3 class="game-title">體育競技</h3>
+                    <p class="game-desc">足球 籃球 電競 賽事直播</p>
+                </div>
+
+                <!-- 棋牌 -->
+                <div class="game-card" data-category="chess" onclick="openGame('chess')">
+                    <div class="game-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3 class="game-title">棋牌遊戲</h3>
+                    <p class="game-desc">德州撲克 麻將 鬥地主</p>
+                </div>
+
+                <!-- 電子 -->
+                <div class="game-card" data-category="slots" onclick="openGame('slots')">
+                    <span class="game-badge">HOT</span>
+                    <div class="game-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3 class="game-title">電子遊藝</h3>
+                    <p class="game-desc">老虎機 水果機 爆分機台</p>
+                </div>
+
+                <!-- 彩票 -->
+                <div class="game-card" data-category="lottery" onclick="openGame('lottery')">
+                    <div class="game-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3 class="game-title">彩票投注</h3>
+                    <p class="game-desc">時時彩 快3 北京賽車</p>
+                </div>
+
+                <!-- 捕魚 -->
+                <div class="game-card" data-category="fishing" onclick="openGame('fishing')">
+                    <div class="game-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3 class="game-title">捕魚機台</h3>
+                    <p class="game-desc">千炮捕魚 深海狩獵 高倍獎金</p>
+                </div>
+
+                <!-- 直播 -->
+                <div class="game-card" data-category="streaming" onclick="openGame('streaming')">
+                    <span class="game-badge">NEW</span>
+                    <div class="game-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="game-title">娛樂直播</h3>
+                    <p class="game-desc">美女主播 互動遊戲 送禮</p>
+                </div>
+
+                <!-- 電競 -->
+                <div class="game-card" data-category="esports" onclick="openGame('esports')">
+                    <div class="game-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="game-title">電競賽事</h3>
+                    <p class="game-desc">LOL DOTA2 CS:GO 投注</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotions -->
+        <div class="promotions">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-gift me-2"></i>優惠活動
+            </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="promo-card">
+                        <h4><i class="fas fa-star text-warning"></i> 首儲優惠</h4>
+                        <p class="mb-2">首次充值即送100%紅利，最高贈送8888元</p>
+                        <small class="text-muted">活動時間: 2024/01/01 - 2024/12/31</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="promo-card">
+                        <h4><i class="fas fa-sync text-success"></i> 每日返水</h4>
+                        <p class="mb-2">每日自動返水0.5%-0.8%，無上限</p>
+                        <small class="text-muted">每日00:00自動發放</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="promo-card">
+                        <h4><i class="fas fa-users text-info"></i> 推薦好友</h4>
+                        <p class="mb-2">推薦好友註冊充值，雙方各得888元紅利</p>
+                        <small class="text-muted">推薦越多賺越多</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="promo-card">
+                        <h4><i class="fas fa-crown text-warning"></i> VIP特權</h4>
+                        <p class="mb-2">升級VIP享專屬客服、生日禮金、專屬活動</p>
+                        <small class="text-muted">累計投注自動升級</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部導航欄 -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-items">
+            <a href="#" class="bottom-nav-item" onclick="showPromotions(); return false;">
+                <div class="bottom-nav-icon"><i class="fas fa-gift"></i></div>
+                <div class="bottom-nav-text">優惠</div>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="showAccount(); return false;">
+                <div class="bottom-nav-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="bottom-nav-text">帳務</div>
+            </a>
+            <a href="#" class="bottom-nav-item deposit-btn active" onclick="showDeposit(); return false;">
+                <div class="bottom-nav-icon"><i class="fas fa-crown"></i></div>
+                <div class="bottom-nav-text">存提</div>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="showService(); return false;">
+                <div class="bottom-nav-icon"><i class="fas fa-star"></i></div>
+                <div class="bottom-nav-text">服務</div>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="showProfile(); return false;">
+                <div class="bottom-nav-icon"><i class="fas fa-user"></i></div>
+                <div class="bottom-nav-text">我</div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-sign-in-alt me-2"></i>會員登入
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">帳號</label>
+                            <input type="text" class="form-control" id="loginUsername" placeholder="請輸入帳號" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">密碼</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="請輸入密碼" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">記住我</label>
+                        </div>
+                        <button type="submit" class="btn btn-register w-100 py-2">
+                            <i class="fas fa-sign-in-alt me-2"></i>登入
+                        </button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-warning">忘記密碼？</a>
+                        <span class="mx-2">|</span>
+                        <a href="#" onclick="showRegister()" class="text-warning">立即註冊</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i>會員註冊
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label class="form-label">帳號</label>
+                            <input type="text" class="form-control" id="regUsername" placeholder="6-12位英文或數字" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">密碼</label>
+                            <input type="password" class="form-control" id="regPassword" placeholder="6-16位密碼" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">確認密碼</label>
+                            <input type="password" class="form-control" id="regConfirmPassword" placeholder="再次輸入密碼" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">手機號碼</label>
+                            <input type="tel" class="form-control" id="regPhone" placeholder="請輸入手機號碼" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="regEmail" placeholder="請輸入Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">推薦碼（選填）</label>
+                            <input type="text" class="form-control" id="regReferral" placeholder="如有推薦人請填寫">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                我已閱讀並同意<a href="#" class="text-warning">服務條款</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-register w-100 py-2">
+                            <i class="fas fa-user-plus me-2"></i>立即註冊
+                        </button>
+                    </form>
+                    <div class="text-center mt-3">
+                        已有帳號？<a href="#" onclick="showLogin()" class="text-warning">立即登入</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div class="modal fade" id="depositModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-plus-circle me-2"></i>充值
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="depositForm">
+                        <div class="mb-3">
+                            <label class="form-label">充值金額</label>
+                            <input type="number" class="form-control" id="depositAmount" placeholder="請輸入充值金額" min="100" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">支付方式</label>
+                            <select class="form-select" id="depositMethod" required>
+                                <option value="">請選擇支付方式</option>
+                                <option value="bank">銀行轉帳</option>
+                                <option value="alipay">支付寶</option>
+                                <option value="wechat">微信支付</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-register w-100 py-2">
+                            <i class="fas fa-plus-circle me-2"></i>確認充值
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div class="modal fade" id="withdrawModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-minus-circle me-2"></i>提款
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="withdrawForm">
+                        <div class="mb-3">
+                            <label class="form-label">提款金額</label>
+                            <input type="number" class="form-control" id="withdrawAmount" placeholder="請輸入提款金額" min="100" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">銀行帳號</label>
+                            <input type="text" class="form-control" id="bankAccount" placeholder="請輸入銀行帳號" required>
+                        </div>
+                        <button type="submit" class="btn btn-register w-100 py-2">
+                            <i class="fas fa-minus-circle me-2"></i>確認提款
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal - 帳務 -->
+    <div class="modal fade" id="accountModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-alt me-2"></i>帳務記錄
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center p-3" style="background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                            <div>
+                                <small class="text-muted">當前餘額</small>
+                                <h4 class="mb-0" id="accountBalance">0 元</h4>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted">今日流水</small>
+                                <h5 class="mb-0" id="todayFlow">0 元</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="transactionType" id="typeAll" value="all" checked>
+                            <label class="btn btn-outline-warning" for="typeAll">全部</label>
+                            
+                            <input type="radio" class="btn-check" name="transactionType" id="typeDeposit" value="deposit">
+                            <label class="btn btn-outline-warning" for="typeDeposit">充值</label>
+                            
+                            <input type="radio" class="btn-check" name="transactionType" id="typeWithdraw" value="withdraw">
+                            <label class="btn btn-outline-warning" for="typeWithdraw">提款</label>
+                            
+                            <input type="radio" class="btn-check" name="transactionType" id="typeBet" value="bet">
+                            <label class="btn btn-outline-warning" for="typeBet">投注</label>
+                        </div>
+                    </div>
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+                                    <th>時間</th>
+                                    <th>類型</th>
+                                    <th>金額</th>
+                                    <th>狀態</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionList">
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">暫無交易記錄</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal - 服務 -->
+    <div class="modal fade" id="serviceModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-star me-2"></i>客服服務
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <h6 class="mb-3"><i class="fas fa-headset me-2"></i>聯繫客服</h6>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-warning" onclick="window.open('tel:400-888-8888')">
+                                <i class="fas fa-phone me-2"></i>電話客服：400-888-8888
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="window.open('https://wa.me/1234567890')">
+                                <i class="fab fa-whatsapp me-2"></i>WhatsApp 客服
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="window.open('https://t.me/casino_support')">
+                                <i class="fab fa-telegram me-2"></i>Telegram 客服
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="mb-3"><i class="fas fa-question-circle me-2"></i>常見問題</h6>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 215, 0, 0.3);">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="background: transparent; color: #fff;">
+                                        如何進行充值？
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        點擊「存提」按鈕，選擇充值金額和支付方式，確認後即可完成充值。
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 215, 0, 0.3);">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="background: transparent; color: #fff;">
+                                        提款需要多長時間？
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        提款申請提交後，通常在1-3個工作天內處理完成。
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 215, 0, 0.3);">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="background: transparent; color: #fff;">
+                                        如何獲得VIP特權？
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        累計投注達到一定金額後，系統會自動升級您的VIP等級，享受更多專屬優惠。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal - 個人資料 -->
+    <div class="modal fade" id="profileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user me-2"></i>個人資料
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="mb-3">
+                            <i class="fas fa-user-circle" style="font-size: 4rem; color: var(--gold);"></i>
+                        </div>
+                        <h5 id="profileUsername">未登入</h5>
+                        <p class="text-muted mb-0" id="profileLevel">普通會員</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">帳號</label>
+                        <input type="text" class="form-control" id="profileUsernameInput" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">手機號碼</label>
+                        <input type="tel" class="form-control" id="profilePhone" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="profileEmail" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">註冊時間</label>
+                        <input type="text" class="form-control" id="profileCreatedAt" readonly>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-warning" onclick="showChangePassword()">
+                            <i class="fas fa-key me-2"></i>修改密碼
+                        </button>
+                        <button class="btn btn-outline-danger" onclick="logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i>登出
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-key me-2"></i>修改密碼
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label class="form-label">當前密碼</label>
+                            <input type="password" class="form-control" id="currentPassword" placeholder="請輸入當前密碼" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">新密碼</label>
+                            <input type="password" class="form-control" id="newPassword" placeholder="請輸入新密碼（6-16位）" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">確認新密碼</label>
+                            <input type="password" class="form-control" id="confirmNewPassword" placeholder="再次輸入新密碼" required>
+                        </div>
+                        <button type="submit" class="btn btn-register w-100 py-2">
+                            <i class="fas fa-key me-2"></i>確認修改
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 容器 -->
+    <div class="toast-container"></div>
+
+    <!-- 加載動畫 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script>
+        // 使用 localStorage 模擬用戶數據存儲
+        let currentUser = null;
+
+        // 顯示 Toast 通知
+        function showToast(message, type = 'info') {
+            const toastContainer = document.querySelector('.toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast-custom ${type}`;
+            toast.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} me-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // 顯示/隱藏加載動畫
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        // 顯示登入模態框
+        function showLogin() {
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+
+        // 顯示註冊模態框
+        function showRegister() {
+            const registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+            registerModal.show();
+        }
+
+        // 顯示每日簽到功能
+        function showCheckIn() {
+            if (!currentUser) {
+                showToast('請先登入才能簽到', 'warning');
+                showLogin();
+                return;
+            }
+            
+            // 檢查今日是否已簽到
+            const today = new Date().toDateString();
+            const lastCheckIn = localStorage.getItem(`checkIn_${currentUser.username}`);
+            
+            if (lastCheckIn === today) {
+                showToast('您今天已經簽到過了！明天再來吧', 'info');
+                return;
+            }
+            
+            // 執行簽到
+            const checkInReward = Math.floor(Math.random() * 100) + 50; // 50-150 隨機獎勵
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.username === currentUser.username);
+            
+            if (userIndex !== -1) {
+                users[userIndex].balance += checkInReward;
+                localStorage.setItem('users', JSON.stringify(users));
+                currentUser = users[userIndex];
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                localStorage.setItem(`checkIn_${currentUser.username}`, today);
+                
+                // 記錄交易
+                const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+                transactions.push({
+                    username: currentUser.username,
+                    type: 'win',
+                    amount: checkInReward,
+                    status: 'completed',
+                    date: new Date().toISOString(),
+                    description: '每日簽到獎勵'
+                });
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+                
+                showToast(`簽到成功！獲得 ${checkInReward} 元獎勵！`, 'success');
+                updateUI();
+            }
+        }
+
+        // 顯示充值模態框
+        function showDeposit() {
+            updateBottomNavActive('deposit');
+            const depositModal = new bootstrap.Modal(document.getElementById('depositModal'));
+            depositModal.show();
+        }
+
+        // 顯示提款模態框
+        function showWithdraw() {
+            const withdrawModal = new bootstrap.Modal(document.getElementById('withdrawModal'));
+            withdrawModal.show();
+        }
+
+        // 處理註冊表單提交
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const phone = document.getElementById('regPhone').value;
+            const email = document.getElementById('regEmail').value;
+            const referral = document.getElementById('regReferral').value;
+            
+            // 驗證帳號長度
+            if (username.length < 6 || username.length > 12) {
+                showToast('帳號長度必須為 6-12 位', 'error');
+                return;
+            }
+            
+            // 驗證密碼長度
+            if (password.length < 6 || password.length > 16) {
+                showToast('密碼長度必須為 6-16 位', 'error');
+                return;
+            }
+            
+            // 驗證密碼確認
+            if (password !== confirmPassword) {
+                showToast('兩次輸入的密碼不一致', 'error');
+                return;
+            }
+            
+            // 驗證手機號碼格式
+            if (!/^09\d{8}$/.test(phone)) {
+                showToast('請輸入有效的手機號碼（10位數字，以09開頭）', 'error');
+                return;
+            }
+            
+            // 驗證 Email 格式
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('請輸入有效的 Email 地址', 'error');
+                return;
+            }
+            
+            // 檢查用戶是否已存在
+            const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            if (existingUsers.some(user => user.username === username)) {
+                showToast('該帳號已被註冊，請使用其他帳號', 'error');
+                return;
+            }
+            
+            // 創建新用戶
+            const newUser = {
+                username: username,
+                password: password,
+                phone: phone,
+                email: email,
+                referral: referral || '',
+                balance: 0,
+                createdAt: new Date().toISOString()
+            };
+            
+            // 保存用戶數據
+            existingUsers.push(newUser);
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+            
+            // 顯示成功訊息
+            showToast('註冊成功！歡迎加入皇冠娛樂城！', 'success');
+            
+            // 關閉註冊模態框
+            const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+            registerModal.hide();
+            
+            // 清空表單
+            document.getElementById('registerForm').reset();
+            
+            // 自動登入
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateUI();
+        });
+
+        // 處理登入表單提交
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // 從 localStorage 獲取用戶數據
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                showToast('登入成功！', 'success');
+                
+                // 關閉登入模態框
+                const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                loginModal.hide();
+                
+                // 清空表單
+                document.getElementById('loginForm').reset();
+                
+                updateUI();
+            } else {
+                showToast('帳號或密碼錯誤，請重新輸入', 'error');
+            }
+        });
+
+        // 處理充值表單提交
+        document.getElementById('depositForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showToast('請先登入', 'warning');
+                showLogin();
+                return;
+            }
+            
+            const amount = parseFloat(document.getElementById('depositAmount').value);
+            const method = document.getElementById('depositMethod').value;
+            
+            if (amount < 100) {
+                showToast('最低充值金額為 100 元', 'warning');
+                return;
+            }
+            
+            // 更新用戶餘額
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.username === currentUser.username);
+            if (userIndex !== -1) {
+                users[userIndex].balance += amount;
+                localStorage.setItem('users', JSON.stringify(users));
+                currentUser = users[userIndex];
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                // 記錄交易
+                const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+                transactions.push({
+                    username: currentUser.username,
+                    type: 'deposit',
+                    amount: amount,
+                    method: method,
+                    status: 'completed',
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+            }
+            
+            showToast(`充值成功！已充值 ${amount.toLocaleString()} 元`, 'success');
+            
+            // 關閉模態框
+            const depositModal = bootstrap.Modal.getInstance(document.getElementById('depositModal'));
+            depositModal.hide();
+            
+            // 清空表單
+            document.getElementById('depositForm').reset();
+            
+            updateUI();
+        });
+
+        // 處理提款表單提交
+        document.getElementById('withdrawForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showToast('請先登入', 'warning');
+                showLogin();
+                return;
+            }
+            
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            const bankAccount = document.getElementById('bankAccount').value;
+            
+            if (amount < 100) {
+                showToast('最低提款金額為 100 元', 'warning');
+                return;
+            }
+            
+            if (amount > currentUser.balance) {
+                showToast('餘額不足', 'error');
+                return;
+            }
+            
+            // 更新用戶餘額
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.username === currentUser.username);
+            if (userIndex !== -1) {
+                users[userIndex].balance -= amount;
+                localStorage.setItem('users', JSON.stringify(users));
+                currentUser = users[userIndex];
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                // 記錄交易
+                const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+                transactions.push({
+                    username: currentUser.username,
+                    type: 'withdraw',
+                    amount: -amount,
+                    bankAccount: bankAccount,
+                    status: 'pending',
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+            }
+            
+            showToast(`提款申請已提交！金額：${amount.toLocaleString()} 元，預計1-3個工作天處理完成`, 'success');
+            
+            // 關閉模態框
+            const withdrawModal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+            withdrawModal.hide();
+            
+            // 清空表單
+            document.getElementById('withdrawForm').reset();
+            
+            updateUI();
+        });
+
+        // 更新 UI
+        function updateUI() {
+            if (currentUser) {
+                document.getElementById('authButtons').style.display = 'none';
+                document.getElementById('userMenu').style.display = 'block';
+                document.getElementById('balanceSection').style.display = 'block';
+                document.getElementById('username').textContent = currentUser.username;
+                document.getElementById('userBalance').textContent = currentUser.balance.toLocaleString();
+            } else {
+                document.getElementById('authButtons').style.display = 'block';
+                document.getElementById('userMenu').style.display = 'none';
+                document.getElementById('balanceSection').style.display = 'none';
+            }
+        }
+
+        // 登出功能
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            showToast('已成功登出', 'info');
+            updateUI();
+        }
+
+        // 遊戲開啟功能
+        function openGame(gameType) {
+            if (!currentUser) {
+                showToast('請先登入或註冊', 'warning');
+                showLogin();
+                return;
+            }
+            // 跳轉到對應的遊戲頁面
+            const gamePages = {
+                'live': 'live.html',
+                'sports': 'sports.html',
+                'chess': 'chess.html',
+                'slots': 'slots.html',
+                'lottery': 'lottery.html',
+                'fishing': 'fishing.html',
+                'streaming': 'streaming.html',
+                'esports': 'esports.html'
+            };
+            if (gamePages[gameType]) {
+                window.location.href = gamePages[gameType];
+            }
+        }
+
+        // 側邊欄過濾遊戲
+        function filterGames(category, element) {
+            // 更新活動狀態
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (element) {
+                element.closest('.sidebar-item').classList.add('active');
+            } else {
+                document.querySelectorAll('.sidebar-item').forEach(item => {
+                    if (item.onclick && item.onclick.toString().includes(category)) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+            
+            // 過濾遊戲卡片
+            const gameCards = document.querySelectorAll('.game-card');
+            const categoryMap = {
+                'popular': ['live', 'slots', 'sports', 'chess', 'lottery', 'fishing', 'streaming', 'esports'], // 熱門顯示所有
+                'ku': [], // KU 暫時沒有對應遊戲
+                'slots': ['slots'], // 電子
+                'live': ['live'], // 真人
+                'sports': ['sports'], // 體育
+                'lottery': ['lottery'], // 彩球
+                'chess': ['chess'], // 棋牌
+                'fishing': ['fishing'], // 捕魚
+                'esports': ['esports'] // 電競
+            };
+            
+            const targetCategories = categoryMap[category] || [];
+            
+            gameCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'popular') {
+                    // 熱門顯示所有
+                    card.style.display = 'flex';
+                } else if (targetCategories.length === 0) {
+                    // 如果沒有對應類別（如 KU），隱藏所有
+                    card.style.display = 'none';
+                } else {
+                    // 檢查卡片類別是否在目標類別列表中
+                    const matches = targetCategories.includes(cardCategory);
+                    card.style.display = matches ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // 底部導航欄函數
+        function showPromotions() {
+            // 更新活動狀態
+            updateBottomNavActive('promotions');
+            // 顯示優惠區域
+            const promotions = document.querySelector('.promotions');
+            if (promotions) {
+                promotions.classList.add('show');
+                setTimeout(() => {
+                    promotions.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // 顯示帳務模態框
+        function showAccount() {
+            if (!currentUser) {
+                showToast('請先登入', 'warning');
+                showLogin();
+                return;
+            }
+            updateBottomNavActive('account');
+            loadAccountData();
+            const accountModal = new bootstrap.Modal(document.getElementById('accountModal'));
+            accountModal.show();
+        }
+
+        // 載入帳務數據
+        function loadAccountData() {
+            if (!currentUser) return;
+            
+            // 更新餘額顯示
+            document.getElementById('accountBalance').textContent = currentUser.balance.toLocaleString() + ' 元';
+            
+            // 計算今日流水
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            const userTransactions = transactions.filter(t => t.username === currentUser.username);
+            const today = new Date().toDateString();
+            const todayTransactions = userTransactions.filter(t => new Date(t.date).toDateString() === today);
+            const todayFlow = todayTransactions.reduce((sum, t) => sum + Math.abs(t.amount), 0);
+            document.getElementById('todayFlow').textContent = todayFlow.toLocaleString() + ' 元';
+            
+            // 載入交易記錄
+            renderTransactions(userTransactions);
+            
+            // 綁定過濾器事件
+            document.querySelectorAll('input[name="transactionType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    filterTransactions(this.value, userTransactions);
+                });
+            });
+        }
+
+        // 渲染交易記錄
+        function renderTransactions(transactions) {
+            const tbody = document.getElementById('transactionList');
+            if (transactions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">暫無交易記錄</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = transactions
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .map(t => {
+                    const date = new Date(t.date);
+                    const typeMap = {
+                        'deposit': { text: '充值', class: 'text-success', icon: 'fa-plus-circle' },
+                        'withdraw': { text: '提款', class: 'text-danger', icon: 'fa-minus-circle' },
+                        'bet': { text: '投注', class: 'text-warning', icon: 'fa-dice' },
+                        'win': { text: '中獎', class: 'text-info', icon: 'fa-trophy' }
+                    };
+                    const typeInfo = typeMap[t.type] || { text: t.type, class: '', icon: 'fa-circle' };
+                    const statusMap = {
+                        'completed': { text: '已完成', class: 'badge bg-success' },
+                        'pending': { text: '處理中', class: 'badge bg-warning' },
+                        'failed': { text: '失敗', class: 'badge bg-danger' }
+                    };
+                    const statusInfo = statusMap[t.status] || { text: t.status, class: 'badge bg-secondary' };
+                    
+                    return `
+                        <tr>
+                            <td>${date.toLocaleString('zh-TW')}</td>
+                            <td><i class="fas ${typeInfo.icon} me-1"></i><span class="${typeInfo.class}">${typeInfo.text}</span></td>
+                            <td class="${t.amount > 0 ? 'text-success' : 'text-danger'}">${t.amount > 0 ? '+' : ''}${t.amount.toLocaleString()} 元</td>
+                            <td><span class="${statusInfo.class}">${statusInfo.text}</span></td>
+                        </tr>
+                    `;
+                }).join('');
+        }
+
+        // 過濾交易記錄
+        function filterTransactions(type, allTransactions) {
+            let filtered = allTransactions;
+            if (type !== 'all') {
+                filtered = allTransactions.filter(t => t.type === type);
+            }
+            renderTransactions(filtered);
+        }
+
+        // 顯示服務模態框
+        function showService() {
+            updateBottomNavActive('service');
+            const serviceModal = new bootstrap.Modal(document.getElementById('serviceModal'));
+            serviceModal.show();
+        }
+
+        // 顯示個人資料模態框
+        function showProfile() {
+            updateBottomNavActive('profile');
+            if (!currentUser) {
+                showToast('請先登入', 'warning');
+                showLogin();
+                return;
+            }
+            
+            // 載入用戶資料
+            document.getElementById('profileUsername').textContent = currentUser.username;
+            document.getElementById('profileUsernameInput').value = currentUser.username;
+            document.getElementById('profilePhone').value = currentUser.phone || '';
+            document.getElementById('profileEmail').value = currentUser.email || '';
+            
+            const createdAt = new Date(currentUser.createdAt);
+            document.getElementById('profileCreatedAt').value = createdAt.toLocaleString('zh-TW');
+            
+            // 計算VIP等級
+            const totalBet = JSON.parse(localStorage.getItem('transactions') || '[]')
+                .filter(t => t.username === currentUser.username && t.type === 'bet')
+                .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+            
+            let level = '普通會員';
+            if (totalBet >= 1000000) level = '鑽石VIP';
+            else if (totalBet >= 500000) level = '白金VIP';
+            else if (totalBet >= 100000) level = '黃金VIP';
+            else if (totalBet >= 50000) level = '白銀VIP';
+            
+            document.getElementById('profileLevel').textContent = level;
+            
+            const profileModal = new bootstrap.Modal(document.getElementById('profileModal'));
+            profileModal.show();
+        }
+
+        // 顯示修改密碼模態框
+        function showChangePassword() {
+            const changePasswordModal = new bootstrap.Modal(document.getElementById('changePasswordModal'));
+            changePasswordModal.show();
+        }
+
+        function updateBottomNavActive(activeItem) {
+            document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            const items = {
+                'promotions': 0,
+                'account': 1,
+                'deposit': 2,
+                'service': 3,
+                'profile': 4
+            };
+            
+            const navItems = document.querySelectorAll('.bottom-nav-item');
+            if (navItems[items[activeItem]]) {
+                navItems[items[activeItem]].classList.add('active');
+            }
+        }
+
+        // 處理修改密碼表單提交
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showToast('請先登入', 'warning');
+                return;
+            }
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+            
+            // 驗證當前密碼
+            if (currentPassword !== currentUser.password) {
+                showToast('當前密碼錯誤', 'error');
+                return;
+            }
+            
+            // 驗證新密碼長度
+            if (newPassword.length < 6 || newPassword.length > 16) {
+                showToast('新密碼長度必須為 6-16 位', 'error');
+                return;
+            }
+            
+            // 驗證新密碼確認
+            if (newPassword !== confirmNewPassword) {
+                showToast('兩次輸入的新密碼不一致', 'error');
+                return;
+            }
+            
+            // 更新密碼
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.username === currentUser.username);
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem('users', JSON.stringify(users));
+                currentUser = users[userIndex];
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            
+            showToast('密碼修改成功！', 'success');
+            
+            // 關閉模態框
+            const changePasswordModal = bootstrap.Modal.getInstance(document.getElementById('changePasswordModal'));
+            changePasswordModal.hide();
+            
+            // 清空表單
+            document.getElementById('changePasswordForm').reset();
+        });
+
+        // 頁面載入時檢查登入狀態
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                // 更新用戶數據（從 users 列表獲取最新餘額）
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.username === currentUser.username);
+                if (user) {
+                    currentUser = user;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+            }
+            updateUI();
+            
+            // 初始化遊戲過濾（顯示所有）
+            if (window.innerWidth <= 768) {
+                filterGames('popular');
+            }
+        });
+    </script>
+</body>
+</html>

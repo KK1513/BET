@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彩票投注 - 皇冠娛樂城</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* 主容器佈局 */
+        .page-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* 左側垂直導航欄 */
+        .left-sidebar {
+            width: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 15px 5px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 5px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .sidebar-item.active {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: #000;
+        }
+
+        .sidebar-item:not(.active):hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .sidebar-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* 主內容區域 */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* 遊戲列表 - 三行顯示（垂直排列） */
+        .game-list { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 15px; 
+            margin: 0; 
+        }
+
+        .game-item { 
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.6), rgba(26, 0, 51, 0.8)); 
+            border-radius: 20px; 
+            padding: 20px; 
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid transparent; 
+            transition: all 0.4s; 
+            cursor: pointer; 
+            position: relative; 
+        }
+
+        .game-item:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--gold); 
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4); 
+        }
+
+        .game-item-icon-wrapper {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .game-item-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .game-item-content {
+            flex: 1;
+        }
+
+        .game-item-title { 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+            color: var(--gold); 
+        }
+
+        .game-item-desc { 
+            font-size: 0.9rem; 
+            opacity: 0.8; 
+            margin: 0;
+        }
+
+        .page-header { 
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.8), rgba(26, 0, 51, 0.9)); 
+            border-radius: 20px; 
+            padding: 40px; 
+            margin: 30px 0; 
+            text-align: center; 
+            border: 2px solid rgba(255, 215, 0, 0.3); 
+        }
+
+        .page-title { 
+            font-size: 2.5rem; 
+            font-weight: bold; 
+            background: linear-gradient(135deg, var(--gold), #fff, var(--neon-blue)); 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            margin-bottom: 15px; 
+        }
+
+        .page-subtitle { 
+            font-size: 1.2rem; 
+            opacity: 0.9; 
+        }
+
+        /* 手機版樣式 */
+        @media (max-width: 768px) {
+            .page-container {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .left-sidebar {
+                width: 70px;
+                padding: 10px 4px;
+                border-radius: 0 12px 12px 0;
+                top: 60px;
+                max-height: calc(100vh - 80px);
+            }
+
+            .sidebar-icon {
+                font-size: 1.3rem;
+                margin-bottom: 3px;
+            }
+
+            .sidebar-text {
+                font-size: 0.7rem;
+            }
+
+            .game-list {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .game-item {
+                padding: 15px;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .game-item-icon-wrapper {
+                width: 60px;
+                height: 60px;
+            }
+
+            .game-item-icon {
+                font-size: 2rem;
+            }
+
+            .game-item-title {
+                font-size: 1rem;
+                margin-bottom: 5px;
+            }
+
+            .game-item-desc {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"><span></span><span></span><span></span></div>
+    <div class="top-bar"><div class="container"><div class="d-flex justify-content-between align-items-center"><div><i class="fas fa-phone-alt me-2"></i>24小時客服: 400-888-8888</div><div><i class="fas fa-envelope me-2"></i>service@casino.com</div></div></div></div>
+    <header class="main-header py-3"><div class="container"><div class="row align-items-center"><div class="col-md-3"><div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;"><i class="fas fa-crown"></i> 皇冠娛樂城</div></div><div class="col-md-6 text-center"><div id="balanceSection" style="display: none;"><div class="balance-display"><i class="fas fa-wallet me-2"></i>餘額: <span id="userBalance">0</span> 元</div></div></div><div class="col-md-3 text-end"><div id="authButtons"><button class="btn btn-login me-2" onclick="showLogin()"><i class="fas fa-sign-in-alt"></i> 登入</button><button class="btn btn-register" onclick="showRegister()"><i class="fas fa-user-plus"></i> 註冊</button></div><div id="userMenu" style="display: none;"><div class="dropdown"><button class="btn btn-login dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user-circle"></i> <span id="username"></span></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#" onclick="showDeposit()"><i class="fas fa-plus-circle"></i> 充值</a></li><li><a class="dropdown-item" href="#" onclick="showWithdraw()"><i class="fas fa-minus-circle"></i> 提款</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> 登出</a></li></ul></div></div></div></div></div></header>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-ticket-alt me-2"></i>彩票投注</h1>
+            <p class="page-subtitle">時時彩 快3 北京賽車</p>
+        </div>
+        <div class="page-container">
+            <!-- 左側垂直導航欄 -->
+            <div class="left-sidebar">
+                <div class="sidebar-item active" onclick="filterGames('all', this)">
+                    <div class="sidebar-icon"><i class="fas fa-fire"></i></div>
+                    <div class="sidebar-text">全部</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('quick', this)">
+                    <div class="sidebar-icon"><i class="fas fa-clock"></i></div>
+                    <div class="sidebar-text">快開</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('racing', this)">
+                    <div class="sidebar-icon"><i class="fas fa-car"></i></div>
+                    <div class="sidebar-text">賽車</div>
+                </div>
+                <div class="sidebar-item" onclick="filterGames('lottery', this)">
+                    <div class="sidebar-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <div class="sidebar-text">彩票</div>
+                </div>
+            </div>
+
+            <!-- 主內容區域 -->
+            <div class="main-content">
+                <div class="game-list">
+                    <div class="game-item" data-lottery-type="quick" onclick="playGame('時時彩')">
+                        <div class="game-item-icon-wrapper" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">
+                            <i class="fas fa-clock game-item-icon" style="color: #fff;"></i>
+                        </div>
+                        <div class="game-item-content">
+                            <h3 class="game-item-title">時時彩</h3>
+                            <p class="game-item-desc">每5分鐘開獎，即時投注</p>
+                        </div>
+                    </div>
+                    <div class="game-item" data-lottery-type="quick" onclick="playGame('快3')">
+                        <div class="game-item-icon-wrapper" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">
+                            <i class="fas fa-dice-three game-item-icon" style="color: #fff;"></i>
+                        </div>
+                        <div class="game-item-content">
+                            <h3 class="game-item-title">快3</h3>
+                            <p class="game-item-desc">快速開獎，簡單易懂</p>
+                        </div>
+                    </div>
+                    <div class="game-item" data-lottery-type="racing" onclick="playGame('北京賽車')">
+                        <div class="game-item-icon-wrapper" style="background: linear-gradient(135deg, #ffe66d, #ffd93d);">
+                            <i class="fas fa-car game-item-icon" style="color: #000;"></i>
+                        </div>
+                        <div class="game-item-content">
+                            <h3 class="game-item-title">北京賽車</h3>
+                            <p class="game-item-desc">刺激賽車，每期開獎</p>
+                        </div>
+                    </div>
+                    <div class="game-item" data-lottery-type="racing" onclick="playGame('幸運飛艇')">
+                        <div class="game-item-icon-wrapper" style="background: linear-gradient(135deg, #a8e6cf, #88d8a3);">
+                            <i class="fas fa-ship game-item-icon" style="color: #000;"></i>
+                        </div>
+                        <div class="game-item-content">
+                            <h3 class="game-item-title">幸運飛艇</h3>
+                            <p class="game-item-desc">快速開獎，高倍率</p>
+                        </div>
+                    </div>
+                    <div class="game-item" data-lottery-type="lottery" onclick="playGame('六合彩')">
+                        <div class="game-item-icon-wrapper" style="background: linear-gradient(135deg, #ff8b94, #ff6b9d);">
+                            <i class="fas fa-star game-item-icon" style="color: #fff;"></i>
+                        </div>
+                        <div class="game-item-content">
+                            <h3 class="game-item-title">六合彩</h3>
+                            <p class="game-item-desc">經典彩票，高額獎金</p>
+                        </div>
+                    </div>
+                    <div class="game-item" data-lottery-type="lottery" onclick="playGame('大樂透')">
+                        <div class="game-item-icon-wrapper" style="background: linear-gradient(135deg, #c7ceea, #9fa8da);">
+                            <i class="fas fa-ticket-alt game-item-icon" style="color: #fff;"></i>
+                        </div>
+                        <div class="game-item-content">
+                            <h3 class="game-item-title">大樂透</h3>
+                            <p class="game-item-desc">選號投注，贏取大獎</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="common.js"></script>
+    <script>
+        function playGame(gameName) { 
+            if (!currentUser) { 
+                alert('請先登入'); 
+                showLogin(); 
+                return; 
+            } 
+            alert(`即將進入 ${gameName} 投注頁面...`); 
+        }
+
+        function filterGames(type, element) {
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (element) {
+                element.closest('.sidebar-item').classList.add('active');
+            }
+            
+            const gameItems = document.querySelectorAll('.game-item');
+            gameItems.forEach(item => {
+                const itemType = item.getAttribute('data-lottery-type');
+                if (type === 'all') {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = itemType === type ? 'flex' : 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

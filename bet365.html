@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>體育投注平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .header {
+            background-color: #1e5f3c;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .header-nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 1px solid #ffd700;
+            color: #ffd700;
+        }
+
+        .btn-register {
+            background-color: #ffd700;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .main-nav {
+            background-color: #252525;
+            padding: 0 20px;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .main-nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            background-color: #333;
+            border-bottom-color: #ffd700;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .sidebar-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-item:hover {
+            background-color: #3a3a3a;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #1e5f3c 0%, #2a7a4f 100%);
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .matches-section {
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 20px;
+        }
+
+        .match-card {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .match-card:hover {
+            background-color: #3a3a3a;
+            transform: translateY(-2px);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .team {
+            flex: 1;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .vs {
+            padding: 0 20px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .odds-container {
+            display: flex;
+            gap: 10px;
+            justify-content: space-around;
+        }
+
+        .odd-box {
+            flex: 1;
+            background-color: #1e5f3c;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .odd-box:hover {
+            background-color: #2a7a4f;
+            transform: scale(1.05);
+        }
+
+        .odd-label {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .odd-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .live-badge {
+            background-color: #ff4444;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .match-teams {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .vs {
+                padding: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">⚽ SportsBet365</div>
+        <div class="header-nav">
+            <a href="#">體育</a>
+            <a href="#">真人娛樂</a>
+            <a href="#">優惠活動</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-login">登入</button>
+            <button class="btn btn-register">立即註冊</button>
+        </div>
+    </div>
+
+    <div class="main-nav">
+        <a href="#" class="active">首頁</a>
+        <a href="#">足球</a>
+        <a href="#">籃球</a>
+        <a href="#">網球</a>
+        <a href="#">棒球</a>
+        <a href="#">電競</a>
+        <a href="#">直播</a>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>熱門聯賽</h3>
+            <div class="sidebar-item">
+                <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英超</span>
+                <span style="color: #ffd700;">38</span>
+            </div>
+            <div class="sidebar-item">
+                <span>🇪🇸 西甲</span>
+                <span style="color: #ffd700;">27</span>
+            </div>
+            <div class="sidebar-item">
+                <span>🇩🇪 德甲</span>
+                <span style="color: #ffd700;">24</span>
+            </div>
+            <div class="sidebar-item">
+                <span>🇮🇹 義甲</span>
+                <span style="color: #ffd700;">19</span>
+            </div>
+            <div class="sidebar-item">
+                <span>⚽ 歐冠</span>
+                <span style="color: #ffd700;">16</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="banner">
+                <h1>歡迎來到體育投注平台</h1>
+                <p>享受最佳賠率與即時投注體驗</p>
+                <button class="btn btn-register" style="padding: 12px 30px; font-size: 16px;">立即加入</button>
+            </div>
+
+            <div class="matches-section">
+                <div class="section-header">
+                    <h2>🔴 熱門賽事</h2>
+                    <span style="color: #aaa;">顯示所有賽事 →</span>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英超聯賽</span>
+                        <span class="live-badge">● 進行中</span>
+                    </div>
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-name">曼徹斯特聯</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team">
+                            <div class="team-name">利物浦</div>
+                        </div>
+                    </div>
+                    <div class="odds-container">
+                        <div class="odd-box">
+                            <div class="odd-label">主勝</div>
+                            <div class="odd-value">2.15</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">平局</div>
+                            <div class="odd-value">3.40</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">客勝</div>
+                            <div class="odd-value">3.25</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <span>🇪🇸 西甲聯賽</span>
+                        <span>今天 22:00</span>
+                    </div>
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-name">皇家馬德里</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team">
+                            <div class="team-name">巴塞隆納</div>
+                        </div>
+                    </div>
+                    <div class="odds-container">
+                        <div class="odd-box">
+                            <div class="odd-label">主勝</div>
+                            <div class="odd-value">1.95</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">平局</div>
+                            <div class="odd-value">3.60</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">客勝</div>
+                            <div class="odd-value">3.80</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <span>🇩🇪 德甲聯賽</span>
+                        <span>明天 01:30</span>
+                    </div>
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-name">拜仁慕尼黑</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team">
+                            <div class="team-name">多特蒙德</div>
+                        </div>
+                    </div>
+                    <div class="odds-container">
+                        <div class="odd-box">
+                            <div class="odd-label">主勝</div>
+                            <div class="odd-value">1.65</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">平局</div>
+                            <div class="odd-value">4.20</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">客勝</div>
+                            <div class="odd-value">4.50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <span>🏀 NBA</span>
+                        <span>今天 09:00</span>
+                    </div>
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-name">洛杉磯湖人</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team">
+                            <div class="team-name">金州勇士</div>
+                        </div>
+                    </div>
+                    <div class="odds-container">
+                        <div class="odd-box">
+                            <div class="odd-label">主勝</div>
+                            <div class="odd-value">1.85</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">讓分</div>
+                            <div class="odd-value">1.90</div>
+                        </div>
+                        <div class="odd-box">
+                            <div class="odd-label">客勝</div>
+                            <div class="odd-value">1.95</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.odd-box').forEach(box => {
+            box.addEventListener('click', function() {
+                this.style.backgroundColor = '#ffd700';
+                this.style.color = '#000';
+                setTimeout(() => {
+                    this.style.backgroundColor = '#1e5f3c';
+                    this.style.color = '#fff';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
